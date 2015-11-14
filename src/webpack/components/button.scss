@@ -8,8 +8,14 @@
   border-radius: 3px;
   color: white;
   font-size: 16px;
+  opacity: 0.5;
 
-  &:hover {
-    background-color: $color-blue;
+  &.button--enabled {
+    cursor: pointer;
+    opacity: 1;
+
+    &:hover {
+      background-color: $color-blue;
+    }
   }
 }

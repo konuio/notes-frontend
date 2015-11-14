@@ -1,7 +1,7 @@
 (ns notecards.core
   (:require [devtools.core :as devtools]
             [notecards.button]
-            [notecards.page]))
+            [notecards.note]))
 
 (defonce setup (do
                  (devtools/set-pref! :install-sanity-hints true)

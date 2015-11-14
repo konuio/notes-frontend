@@ -14,6 +14,8 @@
                  [shodan "0.4.2"]
                  [devcards "0.2.1"]
                  [binaryage/devtools "0.4.1"]
+                 [funcool/promesa "0.5.1"]
+                 [funcool/cats "1.0.0"]
                  ]
 
   :plugins [[lein-cljsbuild "1.1.1"]

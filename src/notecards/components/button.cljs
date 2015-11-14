@@ -1,4 +1,4 @@
-(ns notecards.button
+(ns notecards.components.button
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om :include-macros true]
             [sablono.core :as html :refer-macros [html]]
@@ -6,12 +6,13 @@
             [goog.string.format]
             [clojure.string]))
 
-(defn button [{:keys [type className title iconClassName] :as data}]
+(defn button [{:keys [type className title iconClassName on-click] :as data}]
   (let [enabled (get data :enabled true)]
     (om/component
       (html [:button
              {:type "button"
-              :className (js/classNames "button" (goog.string.format "button--%s" type) (if enabled "button--enabled") className)}
+              :className (js/classNames "button" (goog.string.format "button--%s" type) (if enabled "button--enabled") className)
+              :on-click (if enabled on-click)}
              (if iconClassName
                [:i
                 {:className (js/classNames "button-icon" "icon" iconClassName)}])

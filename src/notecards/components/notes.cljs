@@ -1,11 +1,11 @@
-(ns notecards.notes
+(ns notecards.components.notes
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om :include-macros true]
             [sablono.core :as html :refer-macros [html]]
             [shodan.console :as console :include-macros true]
             [goog.string.format]
             [clojure.string]
-            [notecards.button :refer [button]]))
+            [notecards.components.button :refer [button]]))
 
 (defn note-item [{:keys [title body selected className]}]
   (om/component

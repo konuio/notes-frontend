@@ -3,8 +3,17 @@
 
 .noteItem {
   @include resetFont;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    box-shadow: inset -5px 0 0 0 $color-blue;
+  }
+
+  &.noteItem--selected {
+    box-shadow: inset -5px 0 0 0 $color-blue;
+  }
 
   &-body {
     color: $color-primaryText;

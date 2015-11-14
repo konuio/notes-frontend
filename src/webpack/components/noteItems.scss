@@ -19,6 +19,7 @@
   &-actions {
     display: flex;
     flex-shrink: 0;
+    margin-top: 10px;
     padding-left: $dimen-noteMargin;
     padding-right: $dimen-noteMargin;
   }
@@ -31,8 +32,6 @@
 
   &-items {
     flex-grow: 1;
-    margin-bottom: 10px;
-    margin-top: 10px;
     min-height: 1px;
     overflow-y: auto;
   }

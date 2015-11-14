@@ -7,10 +7,10 @@
             [clojure.string]
             [notecards.button :refer [button]]))
 
-(defn note-item [{:keys [title body className]}]
+(defn note-item [{:keys [title body selected className]}]
   (om/component
     (html [:div
-           {:className (js/classNames "noteItem" className)}
+           {:className (js/classNames "noteItem" (if selected "noteItem--selected") className)}
            [:div.noteItem-title title]
            [:div.noteItem-body (subs body 0 (min (count body) 100))]])))
 

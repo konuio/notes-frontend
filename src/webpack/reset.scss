@@ -1,0 +1,23 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  font-family: $fontFamily-firaSans;
+  margin: 0;
+}
+
+button {
+  font-family: $fontFamily-firaSans;
+}
+
+input {
+  font-family: $fontFamily-firaSans;
+}
+
+textarea {
+  font-family: $fontFamily-firaSans;
+}

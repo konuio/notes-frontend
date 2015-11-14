@@ -7,6 +7,18 @@
             [clojure.string]
             [notecards.button :refer [button]]))
 
+(defn valid-email [email]
+  (re-find #".@." email))
+
+(defn valid-password [password]
+  (seq password))
+
+(defn valid-passwords [password confirm]
+  (and
+    (valid-password password)
+    (valid-password confirm)
+    (= password confirm)))
+
 (defn field [{:keys [type value label className]}]
   (om/component
     (html [:div
@@ -36,7 +48,10 @@
             (om/build
               button
               {:className "login-actionButton"
-               :title "Log In"})
+               :title "Log In"
+               :enabled (and
+                          (valid-email email)
+                          (valid-password password))})
             (om/build
               button
               {:className "login-actionButton"
@@ -44,7 +59,7 @@
                :type "transparent"})]])))
 
 (defcard
-  devcard-login
+  devcard-login*
   (om-root login)
   {:className "devcards-login"
    :email ""
@@ -77,7 +92,10 @@
             (om/build
               button
               {:className "login-actionButton"
-               :title "Sign Up"})
+               :title "Sign Up"
+               :enabled (and
+                          (valid-email email)
+                          (valid-passwords password confirm))})
             (om/build
               button
               {:className "login-actionButton"

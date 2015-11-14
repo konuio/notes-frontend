@@ -1,4 +1,4 @@
-(ns notecards.note
+(ns notecards.notes
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om :include-macros true]
             [sablono.core :as html :refer-macros [html]]

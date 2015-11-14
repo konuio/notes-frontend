@@ -2,7 +2,7 @@
   (:require [devtools.core :as devtools]
             [notecards.button]
             [notecards.login]
-            [notecards.note]))
+            [notecards.notes]))
 
 (defonce setup (do
                  (devtools/set-pref! :install-sanity-hints true)

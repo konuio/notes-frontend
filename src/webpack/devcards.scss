@@ -6,6 +6,16 @@
     width: 40px;
   }
 
+  &-login {
+    border: 3px solid pink;
+    width: 500px;
+  }
+
+  &-loginButton {
+    height: 40px;
+    width: 120px;
+  }
+
   &-noteDetail {
     border: 3px solid pink;
     height: 500px;
@@ -21,5 +31,15 @@
     border: 3px solid pink;
     height: 500px;
     width: 500px;
+  }
+
+  &-signup {
+    border: 3px solid pink;
+    width: 500px;
+  }
+
+  &-signupButton {
+    height: 40px;
+    width: 120px;
   }
 }

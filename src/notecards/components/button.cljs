@@ -6,14 +6,30 @@
             [goog.string.format]
             [clojure.string]))
 
-(defn button [{:keys [className iconClassName] :as data}]
+(defn button [{:keys [type className title iconClassName] :as data}]
   (let [enabled (get data :enabled true)]
     (om/component
       (html [:button
              {:type "button"
-              :className (js/classNames "button" (and enabled "button--enabled") className)}
-             [:i
-              {:className (js/classNames "button-icon" "icon" iconClassName)}]]))))
+              :className (js/classNames "button" (goog.string.format "button--%s" type) (if enabled "button--enabled") className)}
+             (if iconClassName
+               [:i
+                {:className (js/classNames "button-icon" "icon" iconClassName)}])
+             (if title
+               [:div.button-title title])]))))
+
+(defcard
+  devcard-login-button*
+  (om-root button)
+  {:className "devcards-loginButton"
+   :title "Log In"})
+
+(defcard
+  devcard-signup-button
+  (om-root button)
+  {:className "devcards-signupButton"
+   :title "Sign Up"
+   :type "transparent"})
 
 (defcard
   devcard-create-button*

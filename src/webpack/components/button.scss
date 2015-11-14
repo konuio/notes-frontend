@@ -18,4 +18,28 @@
       background-color: $color-blue;
     }
   }
+
+  &-title {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  &.button--transparent {
+    background-color: transparent;
+
+    .button-title {
+      color: $color-button;
+    }
+
+    &:hover {
+      background-color: transparent;
+
+      .button-title {
+        color: $color-blue;
+      }
+    }
+  }
 }

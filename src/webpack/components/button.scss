@@ -1,0 +1,15 @@
+@import '../variables';
+@import '../mixins/resetButton';
+@import '../mixins/resetFont';
+
+.button {
+  @include resetButton;
+  background-color: $color-button;
+  border-radius: 3px;
+  color: white;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $color-blue;
+  }
+}

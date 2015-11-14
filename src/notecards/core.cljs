@@ -1,5 +1,6 @@
 (ns notecards.core
   (:require [devtools.core :as devtools]
+            [notecards.button]
             [notecards.page]))
 
 (defonce setup (do

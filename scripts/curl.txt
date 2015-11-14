@@ -1,0 +1,7 @@
+curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/user' --data-binary '{"username":"mking","password":"password"}' -v
+curl -X POST -H 'Content-Type: application/json' 'http://localhost:8080/login' --data-binary '{"username":"mking","password":"password"}' -v
+curl -H 'Cookie: ring-session=d571c137-ccbd-4aee-869e-38f92a1de451' 'http://localhost:8080/authenticated/note' -v
+curl -X POST -H 'Content-Type: application/json' -H 'Cookie: ring-session=d571c137-ccbd-4aee-869e-38f92a1de451' 'http://localhost:8080/authenticated/note' --data-binary '{"title":"matts title","data":"matts data"}' -v
+curl -X PUT -H 'Content-Type: application/json' -H 'Cookie: ring-session=d571c137-ccbd-4aee-869e-38f92a1de451' 'http://localhost:8080/authenticated/note/5646ae7cbee89a5ecbeeb07c' --data-binary '{"title":"matts new title","data":"matts new data"}' -v
+curl -X DELETE -H 'Cookie: ring-session=d571c137-ccbd-4aee-869e-38f92a1de451' 'http://localhost:8080/authenticated/note/5646ae7cbee89a5ecbeeb07c' -v
+curl -X POST -H 'Cookie: ring-session=d571c137-ccbd-4aee-869e-38f92a1de451' 'http://localhost:8080/logout' -v

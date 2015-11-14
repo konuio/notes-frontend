@@ -1,0 +1,3 @@
+mongo development
+db.users
+db.notes

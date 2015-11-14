@@ -1,0 +1,39 @@
+@import '../variables';
+
+.noteItems {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $dimen-noteMargin;
+  padding-top: $dimen-noteMargin;
+
+  &-actionButton {
+    flex-shrink: 0;
+    height: $dimen-actionButton;
+    width: $dimen-actionButton;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    flex-shrink: 0;
+    padding-left: $dimen-noteMargin;
+    padding-right: $dimen-noteMargin;
+  }
+
+  &-item {
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+  }
+
+  &-items {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    min-height: 1px;
+    overflow-y: auto;
+  }
+}

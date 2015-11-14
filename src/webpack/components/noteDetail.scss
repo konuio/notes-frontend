@@ -11,8 +11,8 @@
 
   &-actionButton {
     flex-shrink: 0;
-    height: 40px;
-    width: 40px;
+    height: $dimen-actionButton;
+    width: $dimen-actionButton;
 
     &:not(:first-child) {
       margin-left: 10px;

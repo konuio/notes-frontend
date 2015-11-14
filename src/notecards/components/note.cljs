@@ -7,6 +7,48 @@
             [clojure.string]
             [notecards.button :refer [button]]))
 
+(defn note-item [{:keys [title body className]}]
+  (om/component
+    (html [:div
+           {:className (js/classNames "noteItem" className)}
+           [:div.noteItem-title title]
+           [:div.noteItem-body (subs body 0 (min (count body) 100))]])))
+
+(defcard
+  devcard-note-item
+  (om-root note-item)
+  {:className "devcards-noteItem"
+   :title "Title..."
+   :body (clojure.string/join (repeat 500 "Body "))})
+
+(defn note-items [{:keys [notes className]}]
+  (om/component
+    (html [:div
+           {:className (js/classNames "noteItems" className)}
+           [:div.noteItems-items
+            (map-indexed
+              (fn [i note]
+                (om/build
+                  note-item
+                  (merge note {:react-key i
+                               :className "noteItems-item"})))
+              notes)]
+           [:div.noteItems-actions
+            (om/build
+              button
+              {:className "noteItems-actionButton"
+               :iconClassName "ion-plus"})]])))
+
+(defcard
+  devcard-note-items*
+  (om-root note-items)
+  {:className "devcards-noteItems"
+   :notes (into []
+                (map (fn [i]
+                       {:title (goog.string.format "Title %d" i)
+                        :body (goog.string.format "Body %d" i)}))
+                (range 20))})
+
 (defn note-detail [{:keys [title body changed className]}]
   (om/component
     (html [:div

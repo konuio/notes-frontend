@@ -1,0 +1,26 @@
+@import '../variables';
+@import '../mixins/resetFont';
+
+.noteItem {
+  @include resetFont;
+  display: flex;
+  flex-direction: column;
+
+  &-body {
+    color: $color-primaryText;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: $dimen-noteMargin;
+    padding-right: $dimen-noteMargin;
+  }
+
+  &-title {
+    color: $color-primaryText;
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: $dimen-noteMargin;
+    padding-right: $dimen-noteMargin;
+  }
+}

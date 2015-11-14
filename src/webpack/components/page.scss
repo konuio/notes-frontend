@@ -1,0 +1,73 @@
+@import '../variables';
+@import '../mixins/resetFont';
+@import '../mixins/shadow';
+
+.page {
+  @include resetFont;
+  display: flex;
+  flex-direction: column;
+
+  &-breadcrumb {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  &-card {
+    @include shadow;
+    background-color: $color-card;
+    border-radius: 3px;
+    display: flex;
+    flex-grow: 1;
+    margin: 30px;
+    min-height: 1px;
+  }
+
+  &-content {
+    background-image: url(/img/background.png);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 1px;
+  }
+
+  &-divider {
+    border-left: 1px solid $color-border;
+    bottom: 30px;
+    content: '';
+    left: 50%;
+    position: absolute;
+    top: 30px;
+  }
+
+  &-navbar {
+    align-items: center;
+    background-color: $color-navbar;
+    display: flex;
+    flex-shrink: 0;
+    padding: 30px;
+  }
+
+  &-noteDetail {
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 1px;
+    overflow-y: auto;
+  }
+
+  &-noteItem {
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+  }
+
+  &-notes {
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 1px;
+    overflow-y: auto;
+    padding: 30px;
+  }
+}

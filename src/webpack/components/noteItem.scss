@@ -1,0 +1,18 @@
+@import '../variables';
+@import '../mixins/resetFont';
+
+.noteItem {
+  @include resetFont;
+
+  &-body {
+    color: $color-primaryText;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  &-header {
+    color: $color-primaryText;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}

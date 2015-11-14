@@ -3,6 +3,7 @@
 
 .noteItem {
   @include resetFont;
+  padding: 0 30px;
 
   &-body {
     color: $color-primaryText;

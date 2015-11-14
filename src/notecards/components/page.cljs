@@ -26,8 +26,9 @@
   (om/component
     (html [:div
            {:className (js/classNames "noteDetail" className)}
-           [:div.noteDetail-title title]
-           [:div.noteDetail-body body]])))
+           [:input.noteDetail-title {:type "text"
+                                     :defaultValue title}]
+           [:textarea.noteDetail-body body]])))
 
 (defn page [{:keys [className]}]
   (om/component

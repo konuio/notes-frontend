@@ -31,6 +31,7 @@
                [:label.SignupPage-label "Email"]
                [:input.SignupPage-input {:type "text"
                                          :value username
+                                         :autoFocus true
                                          :on-change (fn [e]
                                                       (app-state/post-message! ch {:action :set-signup
                                                                                    :signup (assoc signup :username e.currentTarget.value)}))}]]

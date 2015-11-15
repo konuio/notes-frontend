@@ -15,7 +15,8 @@
 
 (defn login-page [{:keys [className ch login]}]
   (let [{:keys [username password]} login
-        valid (valid? login)]
+        valid (valid? login)
+        focus (if validations/valid-email? :password :username)]
     (om/component
       (html [:div
              {:className (js/classNames "LoginPage" className)}
@@ -29,6 +30,7 @@
                [:label.LoginPage-label "Email"]
                [:input.LoginPage-input {:type "text"
                                         :value username
+                                        :autoFocus (= focus :username)
                                         :on-change (fn [e]
                                                      (app-state/post-message! ch {:action :set-login
                                                                                   :login (assoc login :username e.currentTarget.value)}))}]]
@@ -36,6 +38,7 @@
                [:label.LoginPage-label "Password"]
                [:input.LoginPage-input {:type "password"
                                         :value password
+                                        :autoFocus (= focus :password)
                                         :on-change (fn [e]
                                                      (app-state/post-message! ch {:action :set-login
                                                                                   :login (assoc login :password e.currentTarget.value)}))}]]

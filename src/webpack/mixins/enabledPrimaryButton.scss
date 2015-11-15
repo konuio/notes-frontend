@@ -1,0 +1,12 @@
+@import '../variables';
+@import './disabledPrimaryButton';
+
+@mixin enabledPrimaryButton {
+  @include disabledPrimaryButton;
+  cursor: pointer;
+  opacity: 1;
+
+  &:hover {
+    background-color: $color-blue;
+  }
+}

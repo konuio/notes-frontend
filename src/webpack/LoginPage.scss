@@ -1,9 +1,10 @@
 @import './variables';
 @import './mixins/card';
+@import './mixins/disabledPrimaryButton';
+@import './mixins/enabledPrimaryButton';
 @import './mixins/fieldInput';
 @import './mixins/fieldLabel';
 @import './mixins/page';
-@import './mixins/primaryButton';
 @import './mixins/secondaryButton';
 
 .LoginPage {
@@ -47,7 +48,11 @@
   }
 
   &-login {
-    @include primaryButton;
+    @include disabledPrimaryButton;
+  }
+
+  &-login--enabled {
+    @include enabledPrimaryButton;
   }
 
   &-signup {

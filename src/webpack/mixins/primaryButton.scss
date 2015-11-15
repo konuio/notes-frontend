@@ -1,0 +1,16 @@
+@import '../variables';
+@import './button';
+
+@mixin primaryButton {
+  @include button;
+  background-color: $color-black;
+  border-radius: $dimen-borderRadius;
+  color: white;
+  cursor: pointer;
+  min-width: 100px;
+  padding: 8px 10px;
+
+  &:hover {
+    background-color: $color-blue;
+  }
+}

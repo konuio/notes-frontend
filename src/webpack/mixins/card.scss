@@ -1,0 +1,8 @@
+@import '../variables';
+
+@mixin card {
+  background-color: $color-card;
+  border-radius: 3px;
+  padding: 40px;
+  box-shadow: 0 2px 4px 0 $color-shadow;
+}

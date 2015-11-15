@@ -5,36 +5,10 @@
             [shodan.console :as console]
             [notecards.app-state :as app-state]
             [notecards.history :as history]
+            [notecards.login :as login]
             [notecards.routes :as routes]
+            [notecards.signup :as signup]
             [cljs.core.async :refer [chan <!]]))
-
-(defn login-page [data]
-  (om/component
-    (html [:div "Login..."
-           [:div
-            [:a {:href "#"
-                 :on-click (fn [e]
-                             (.preventDefault e)
-                             (.setToken history/history (routes/signup-path))
-                             nil)}
-             "Sign up"]]
-           [:div
-            [:a {:href "#"
-                 :on-click (fn [e]
-                             (.preventDefault e)
-                             (.setToken history/history (routes/home-path))
-                             nil)}
-             "Home"]]])))
-
-(defn signup-page [data]
-  (om/component
-    (html [:div "Signup..."
-           [:a {:href "#"
-                :on-click (fn [e]
-                            (.preventDefault e)
-                            (.setToken history/history (routes/login-path))
-                            nil)}
-            "Log in"]])))
 
 (defn home-page [data]
   (om/component
@@ -61,13 +35,12 @@
                 (console/log "received message:" message)
                 (app-state/handle-message! data message)
                 (recur))))
-        (routes/define-routes! ch)
-        (console/log "signup route:" (routes/signup-path))))
+        (routes/define-routes! ch)))
     om/IRenderState
-    (render-state [_ _]
+    (render-state [_ state]
       (console/log "rendering:" data)
       (html (om/build (case page
-                        :login login-page
-                        :signup signup-page
+                        :login login/login-page
+                        :signup signup/signup-page
                         :home home-page)
-                      data)))))
+                      (merge data state))))))

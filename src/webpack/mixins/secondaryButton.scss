@@ -1,0 +1,13 @@
+@import '../variables';
+@import './button';
+
+@mixin secondaryButton {
+  @include button;
+  color: $color-black;
+  cursor: pointer;
+  padding: 8px 0;
+
+  &:hover {
+    color: $color-blue;
+  }
+}

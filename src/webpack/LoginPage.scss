@@ -1,0 +1,56 @@
+@import './variables';
+@import './mixins/card';
+@import './mixins/fieldInput';
+@import './mixins/fieldLabel';
+@import './mixins/page';
+@import './mixins/primaryButton';
+@import './mixins/secondaryButton';
+
+.LoginPage {
+  @include page;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &-actions {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    margin-top: $dimen-fieldMargin;
+  }
+
+  &-card {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
+
+  &-field {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    &:not(:first-child) {
+      margin-top: $dimen-fieldMargin;
+    }
+  }
+
+  &-input {
+    @include fieldInput;
+    flex-shrink: 0;
+  }
+
+  &-label {
+    @include fieldLabel;
+    flex-shrink: 0;
+  }
+
+  &-login {
+    @include primaryButton;
+  }
+
+  &-signup {
+    @include secondaryButton;
+  }
+}

@@ -1,0 +1,10 @@
+@import '../variables';
+@import './resetButton';
+
+@mixin button {
+  @include resetButton;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: $dimen-letterSpacing;
+  text-transform: uppercase;
+}

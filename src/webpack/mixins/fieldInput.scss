@@ -1,0 +1,10 @@
+@import '../variables';
+
+@mixin fieldInput {
+  background-color: transparent;
+  border: 0;
+  color: $color-black;
+  font-size: 24px;
+  outline: none;
+  padding: 0;
+}

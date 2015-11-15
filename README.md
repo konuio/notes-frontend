@@ -1,5 +1,7 @@
 Notecards
 ===
+<img src="screenshot.png" height="720">
+
 Setup
 ---
 ```

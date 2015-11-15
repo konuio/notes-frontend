@@ -62,6 +62,7 @@
                   {:type "text"
                    :value (:title working-note)
                    :placeholder "Title"
+                   :spellCheck false
                    :on-change (fn [e]
                                 (app-state/post-message! ch {:action :set-pending-note
                                                              :note   (assoc working-note :title e.currentTarget.value)}))}]
@@ -69,6 +70,7 @@
                 [:textarea.Note-body
                  {:value (:data working-note)
                   :placeholder "Body"
+                  :spellCheck false
                   :on-change (fn [e]
                                (app-state/post-message! ch {:action :set-pending-note
                                                             :note   (assoc working-note :data e.currentTarget.value)}))}]

@@ -1,0 +1,17 @@
+@import './variables';
+@import './mixins/body';
+
+.ErrorMessage {
+  text-align: center;
+
+  &-subtitle {
+    @include body;
+    color: $color-secondaryText;
+  }
+
+  &-title {
+    @include body;
+    color: $color-secondaryText;
+    font-weight: 500;
+  }
+}

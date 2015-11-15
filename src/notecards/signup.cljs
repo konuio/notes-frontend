@@ -2,10 +2,11 @@
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
+            [notecards.app-state :as app-state]
+            [notecards.buttons :refer [button]]
             [notecards.history :as history]
             [notecards.routes :as routes]
             [notecards.validations :as validations]
-            [notecards.app-state :as app-state]
             [promesa.core :as p]))
 
 (defn- valid? [{:keys [username password confirm]}]
@@ -48,13 +49,15 @@
                                                       (app-state/post-message! ch {:action :set-signup
                                                                                    :signup (assoc signup :confirm e.currentTarget.value)}))}]]
               [:div.SignupPage-actions
-               [:button
-                {:type      "submit"
-                 :className (js/classNames "SignupPage-signup SignupPage-action" (if valid "SignupPage-signup--enabled"))}
-                "Sign up"]
-               [:a.SignupPage-login.SignupPage-action
-                {:href     (routes/login-path)
-                 :on-click (fn [e]
-                             (.preventDefault e)
-                             (.setToken history/history (routes/login-path)))}
-                "Have an account? Log in"]]]]))))
+               (om/build button
+                         {:type "submit"
+                          :className "SignupPage-signup"
+                          :enabledClassName "SignupPage-signup--enabled"
+                          :enabled valid
+                          :content "Sign up"})
+               (om/build button
+                         {:className "SignupPage-login"
+                          :content "Have an account? Log in"
+                          :on-click (fn [e]
+                                      (.preventDefault e)
+                                      (.setToken history/history (routes/login-path)))})]]]))))

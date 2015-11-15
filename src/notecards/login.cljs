@@ -2,6 +2,7 @@
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
+            [notecards.buttons :refer [button]]
             [notecards.history :as history]
             [notecards.routes :as routes]
             [notecards.validations :as validations]
@@ -39,13 +40,15 @@
                                                      (app-state/post-message! ch {:action :set-login
                                                                                   :login (assoc login :password e.currentTarget.value)}))}]]
               [:div.LoginPage-actions
-               [:button
-                {:type     "submit"
-                 :className (js/classNames "LoginPage-login LoginPage-action" (if valid "LoginPage-login--enabled"))}
-                "Log in"]
-               [:a.LoginPage-signup.LoginPage-action
-                {:href     (routes/signup-path)
-                 :on-click (fn [e]
-                             (.preventDefault e)
-                             (.setToken history/history (routes/signup-path)))}
-                "Don't have an account? Sign up"]]]]))))
+               (om/build button
+                         {:type "submit"
+                          :className "LoginPage-login"
+                          :enabledClassName "LoginPage-login--enabled"
+                          :enabled valid
+                          :content "Log in"})
+               (om/build button
+                         {:className "LoginPage-signup"
+                          :content "Don't have an account? Sign up"
+                          :on-click (fn [e]
+                                      (.preventDefault e)
+                                      (.setToken history/history (routes/signup-path)))})]]]))))

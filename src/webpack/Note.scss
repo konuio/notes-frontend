@@ -1,7 +1,8 @@
 @import './variables';
 @import './mixins/actionIcon';
 @import './mixins/body';
-@import './mixins/enabledPrimaryButton';
+@import './mixins/disabledPrimaryIconButton';
+@import './mixins/enabledPrimaryIconButton';
 @import './mixins/marker';
 @import './mixins/resetInput';
 @import './mixins/resetTextArea';
@@ -9,13 +10,11 @@
 .Note {
   display: flex;
   flex-direction: column;
-  padding: $dimen-noteMargin;
+  padding: $dimen-noteMargin 0;
 
   &-action {
-    @include disabledPrimaryButton;
+    @include disabledPrimaryIconButton;
     flex-shrink: 0;
-    height: $dimen-action;
-    width: $dimen-action;
 
     &:not(:first-child) {
       margin-left: 10px;
@@ -23,7 +22,7 @@
   }
 
   &-action--enabled {
-    @include enabledPrimaryButton;
+    @include enabledPrimaryIconButton;
   }
 
   &-actionGroup {
@@ -39,6 +38,7 @@
     display: flex;
     flex-shrink: 0;
     justify-content: space-between;
+    padding: 0 $dimen-noteMargin;
   }
 
   &-body {
@@ -47,40 +47,43 @@
     flex-grow: 1;
     min-height: 1px;
     overflow-y: auto;
+    padding: 0 $dimen-noteMargin;
 
     &::placeholder {
       color: $color-secondaryText;
     }
   }
 
-  &--empty {
-    align-items: center;
-    justify-content: center;
-  }
-
   &-empty {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    min-height: 1px;
   }
 
-  &-emptyBody {
-    @include body;
-    color: $color-secondaryText;
-  }
-
-  &-emptyTitle {
-    @include body;
-    color: $color-secondaryText;
-    font-weight: 500;
+  &-note {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 1px;
   }
 
   &-pending {
     @include marker;
     position: absolute;
     right: $dimen-noteMargin;
-    top: $dimen-noteMargin;
+    top: calc(50% - 5px);
   }
 
   &-title {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0 $dimen-noteMargin;
+  }
+
+  &-titleInput {
     @include resetInput;
     @include body;
     flex-shrink: 0;

@@ -25,7 +25,6 @@ Questions
 
 TODO
 ---
-- Refactor action buttons and primary buttons (with their own enabled/disabled states).
 - Prevent multiple signups if one is in progress. Same for many other requests.
-- devcards
 - Focus login password field after signup.
+- devcards

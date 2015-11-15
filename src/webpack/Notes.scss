@@ -1,6 +1,7 @@
 @import './variables';
 @import './mixins/actionIcon';
 @import './mixins/body';
+@import './mixins/enabledPrimaryIconButton';
 
 .Notes {
   display: flex;
@@ -8,10 +9,8 @@
   padding: $dimen-noteMargin 0;
 
   &-action {
-    @include enabledPrimaryButton;
+    @include enabledPrimaryIconButton;
     flex-shrink: 0;
-    height: $dimen-action;
-    width: $dimen-action;
   }
 
   &-actionIcon {
@@ -26,6 +25,14 @@
 
   &-body {
     @include body;
+  }
+
+  &-empty {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    min-height: 1px;
   }
 
   &-note {
@@ -51,6 +58,7 @@
     flex-direction: column;
     flex-grow: 1;
     min-height: 1px;
+    overflow-y: auto;
   }
 
   &-title {

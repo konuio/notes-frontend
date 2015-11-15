@@ -1,6 +1,6 @@
 Notecards
 ===
-<img src="screenshot.png" height="720">
+<img src="screenshot.png" height="360">
 
 Setup
 ---

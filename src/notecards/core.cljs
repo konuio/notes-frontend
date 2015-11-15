@@ -1,15 +1,8 @@
 (ns notecards.core
   (:require [devtools.core :as devtools]
-            [notecards.api :as api]
             [notecards.app :as app]
             [notecards.app-state :as app-state]
-            [notecards.history :as history]
-            [notecards.components.button]
-            [notecards.components.login]
-            [notecards.components.notes]
-            [notecards.components.pages]
-            [om.core :as om]
-            [shodan.console :as console]))
+            [om.core :as om]))
 
 (defonce setup (do
                  (devtools/set-pref! :install-sanity-hints true)

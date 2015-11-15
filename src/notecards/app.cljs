@@ -3,11 +3,10 @@
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [secretary.core :as secretary]
             [notecards.app-state :as app-state]
             [notecards.history :as history]
-            [cljs.core.async :refer [chan <!]]
-            [notecards.app-channel :as app-channel]))
+            [notecards.routes :as routes]
+            [cljs.core.async :refer [chan <!]]))
 
 (defn login-page [data]
   (om/component
@@ -16,14 +15,14 @@
             [:a {:href "#"
                  :on-click (fn [e]
                              (.preventDefault e)
-                             (.setToken history/history (history/signup-path))
+                             (.setToken history/history (routes/signup-path))
                              nil)}
              "Sign up"]]
            [:div
             [:a {:href "#"
                  :on-click (fn [e]
                              (.preventDefault e)
-                             (.setToken history/history (history/home-path))
+                             (.setToken history/history (routes/home-path))
                              nil)}
              "Home"]]])))
 
@@ -33,7 +32,7 @@
            [:a {:href "#"
                 :on-click (fn [e]
                             (.preventDefault e)
-                            (.setToken history/history (history/login-path))
+                            (.setToken history/history (routes/login-path))
                             nil)}
             "Log in"]])))
 
@@ -45,7 +44,7 @@
             [:a {:href "#"
                  :on-click (fn [e]
                              (.preventDefault e)
-                             (.setToken history/history (history/login-path))
+                             (.setToken history/history (routes/login-path))
                              nil)}
              "Log in"]]])))
 
@@ -60,9 +59,10 @@
         (go (loop []
               (let [message (<! ch)]
                 (console/log "received message:" message)
-                (app-channel/handle-message! data message)
+                (app-state/handle-message! data message)
                 (recur))))
-        (history/define-routes! ch)))
+        (routes/define-routes! ch)
+        (console/log "signup route:" (routes/signup-path))))
     om/IRenderState
     (render-state [_ _]
       (console/log "rendering:" data)

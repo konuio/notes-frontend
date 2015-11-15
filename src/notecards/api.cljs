@@ -1,14 +1,7 @@
 (ns notecards.api
-  (:require-macros [devcards.core :refer [defcard om-root]])
-  (:require [om.core :as om :include-macros true]
-            [sablono.core :as html :refer-macros [html]]
-            [shodan.console :as console :include-macros true]
+  (:require [shodan.console :as console]
             [goog.string.format]
-            [clojure.string]
-            [notecards.components.button :refer [button]]
-            [org.bluebird]
-            [promesa.core :as p]
-            [cats.core :as m]))
+            [promesa.core :as p]))
 
 (defn sign-up [user]
   (p/promise
@@ -61,69 +54,3 @@
                                         (dissoc :id)
                                         clj->js
                                         js/JSON.stringify)})))))
-
-#_(defn print-result [promise]
-  (p/branch promise
-            (fn [response]
-              (console/log "Response:" response))
-            (fn [error]
-              (console/log "Error:" error))))
-
-#_(defn api-tester [{:keys [className]}]
-  (om/component
-    (html [:div
-           {:className (js/classNames "apiTester" className)}
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Sign up"
-              :on-click (fn []
-                          (-> (sign-up {:username "mking+1"
-                                        :password "password"})
-                              print-result))})
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Log in"
-              :on-click (fn []
-                          (-> (log-in {:username "mking+1"
-                                       :password "password"})
-                              print-result))})
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Get notes"
-              :on-click (fn []
-                          (-> (get-notes)
-                              print-result))})
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Create note"
-              :on-click (fn []
-                          (-> (create-note {:title "Title"
-                                            :data "Data"
-                                            :notebook nil})
-                              print-result))})
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Delete note"
-              :on-click (fn []
-                          (-> (delete-note "5647cfc5bee8575380a1a104")
-                              print-result))})
-           (om/build
-             button
-             {:className "apiTester-button"
-              :title "Update note"
-              :on-click (fn []
-                          (-> (update-note (let [revision 2]
-                                             {:id "5647cb73bee8575380a1a100"
-                                              :title (goog.string.format "Title %d" revision)
-                                              :data (goog.string.format "Data %d" revision)}))
-                              print-result))})])))
-
-#_(defcard
-  devcard-api-tester
-  (om-root api-tester)
-  {:className "devcards-apiTester"})

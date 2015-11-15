@@ -1,0 +1,35 @@
+@import './variables';
+@import './mixins/card';
+@import './mixins/page';
+
+.HomePage {
+  @include page;
+  display: flex;
+  flex-direction: column;
+
+  &-card {
+    @include card;
+    display: flex;
+    flex-grow: 1;
+    margin: 40px;
+    min-height: 1px;
+    padding: 0;
+  }
+
+  &-column {
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 1px;
+
+    &:not(:first-child) {
+      &::after {
+        border-left: 1px solid $color-border;
+        bottom: 20px;
+        content: '';
+        left: 0;
+        position: absolute;
+        top: 20px;
+      }
+    }
+  }
+}

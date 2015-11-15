@@ -4,23 +4,12 @@
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
             [notecards.app-state :as app-state]
-            [notecards.history :as history]
+            [notecards.home :as home]
             [notecards.login :as login]
+            [notecards.signup :as signup]
             [notecards.routes :as routes]
             [notecards.signup :as signup]
             [cljs.core.async :refer [chan <!]]))
-
-(defn home-page [data]
-  (om/component
-    (html [:div
-           [:h1 "Home..."]
-           [:div
-            [:a {:href "#"
-                 :on-click (fn [e]
-                             (.preventDefault e)
-                             (.setToken history/history (routes/login-path))
-                             nil)}
-             "Log in"]]])))
 
 (defn app [{:keys [page] :as data} owner]
   (reify
@@ -42,5 +31,5 @@
       (html (om/build (case page
                         :login login/login-page
                         :signup signup/signup-page
-                        :home home-page)
+                        :home home/home-page)
                       (merge data state))))))

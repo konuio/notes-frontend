@@ -1,0 +1,35 @@
+@import './variables';
+@import './mixins/body';
+
+.Notes {
+  display: flex;
+  flex-direction: column;
+  padding: $dimen-noteMargin 0;
+
+  &-body {
+    @include body;
+  }
+
+  &-note {
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0 $dimen-noteMargin;
+
+    &:hover {
+      box-shadow: inset -5px 0 0 0 $color-blue;
+    }
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+
+  &-note--selected {
+    box-shadow: inset -5px 0 0 0 $color-blue;
+  }
+
+  &-title {
+    @include body;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,35 @@
+@import './variables';
+@import './mixins/body';
+
+.Note {
+  padding: $dimen-noteMargin;
+
+  &-body {
+    @include body;
+  }
+
+  &--empty {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  &-empty {
+    text-align: center;
+  }
+
+  &-emptyBody {
+    @include body;
+  }
+
+  &-emptyTitle {
+    @include body;
+    font-weight: 500;
+  }
+
+  &-title {
+    @include body;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

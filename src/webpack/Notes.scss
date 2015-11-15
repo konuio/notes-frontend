@@ -38,7 +38,7 @@
   &-note {
     cursor: pointer;
     flex-shrink: 0;
-    padding: 0 $dimen-noteMargin;
+    padding: 10px $dimen-noteMargin;
 
     &:hover {
       box-shadow: inset -5px 0 0 0 $color-blue;

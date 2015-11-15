@@ -1,16 +1,60 @@
 @import './variables';
+@import './mixins/actionIcon';
 @import './mixins/body';
+@import './mixins/enabledPrimaryButton';
+@import './mixins/marker';
+@import './mixins/resetInput';
+@import './mixins/resetTextArea';
 
 .Note {
+  display: flex;
+  flex-direction: column;
   padding: $dimen-noteMargin;
 
+  &-action {
+    @include disabledPrimaryButton;
+    flex-shrink: 0;
+    height: $dimen-action;
+    width: $dimen-action;
+
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+
+  &-action--enabled {
+    @include enabledPrimaryButton;
+  }
+
+  &-actionGroup {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  &-actionIcon {
+    @include actionIcon;
+  }
+
+  &-actions {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+  }
+
   &-body {
+    @include resetTextArea;
     @include body;
+    flex-grow: 1;
+    min-height: 1px;
+    overflow-y: auto;
+
+    &::placeholder {
+      color: $color-secondaryText;
+    }
   }
 
   &--empty {
     align-items: center;
-    display: flex;
     justify-content: center;
   }
 
@@ -20,16 +64,31 @@
 
   &-emptyBody {
     @include body;
+    color: $color-secondaryText;
   }
 
   &-emptyTitle {
     @include body;
+    color: $color-secondaryText;
     font-weight: 500;
   }
 
+  &-pending {
+    @include marker;
+    position: absolute;
+    right: $dimen-noteMargin;
+    top: $dimen-noteMargin;
+  }
+
   &-title {
+    @include resetInput;
     @include body;
+    flex-shrink: 0;
     font-size: 24px;
     font-weight: 500;
+
+    &::placeholder {
+      color: $color-secondaryText;
+    }
   }
 }

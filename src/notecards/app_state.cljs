@@ -6,7 +6,8 @@
             [notecards.api :as api]
             [promesa.core :as p]
             [notecards.history :as history]
-            [notecards.routes :as routes]))
+            [notecards.routes :as routes]
+            [notecards.utils :refer [find-index]]))
 
 (def default-signup {:username ""
                      :password ""
@@ -15,11 +16,14 @@
 (def default-login {:username ""
                     :password ""})
 
+(def default-pending-note {})
+
 (defonce app-state (atom {:page :home
                           :signup default-signup
                           :login default-login
                           :notes []
-                          :selected-note nil}))
+                          :selected-note nil
+                          :pending-note default-pending-note}))
 
 (defn set-page! [data page]
   (om/transact! data #(assoc % :page page)))
@@ -55,10 +59,48 @@
   (-> (api/get-notes)
       (p/then (fn [notes]
                 (om/transact! data #(-> %
-                                        (assoc :notes notes)))))))
+                                        (assoc :notes notes)
+                                        (assoc :selected-note (:id (first notes)))))))))
 
 (defn select-note! [data id]
-  (om/transact! data #(assoc % :selected-note id)))
+  (om/transact! data #(-> %
+                          (assoc :selected-note id)
+                          (assoc :pending-note default-pending-note))))
+
+(defn set-pending-note! [data note]
+  (om/transact! data #(assoc % :pending-note note)))
+
+(defn save-note! [data note]
+  (-> (api/update-note note)
+      (p/then (fn []
+                (om/transact! data (fn [data]
+                                     (let [note-index (find-index #(= (:id note) (:id %)) (:notes data))]
+                                       (-> data
+                                           (assoc-in [:notes note-index] note)
+                                           (assoc :pending-note default-pending-note)))))))))
+
+(defn cancel-note! [data]
+  (om/transact! data #(assoc % :pending-note default-pending-note)))
+
+(defn delete-note! [data id]
+  (-> (api/delete-note id)
+      (p/then (fn []
+                (om/transact! data (fn [data]
+                                     (let [index (find-index #(= id (:id %)) (:notes data))]
+                                       (let [old-notes (:notes data)
+                                             notes (vec (concat (subvec old-notes 0 index) (subvec old-notes (inc index))))]
+                                         (-> data
+                                             (assoc :notes notes)
+                                             (assoc :selected-note (:id (first notes))))))))))))
+
+(defn create-note! [data]
+  (-> (api/create-note {:title ""
+                        :data ""})
+      (p/then (fn [note]
+                (om/transact! data (fn [data]
+                                     (-> data
+                                         (update :notes #(conj % note))
+                                         (assoc :selected-note (:id note)))))))))
 
 (defn post-message! [ch message]
   (put! ch message))
@@ -72,4 +114,9 @@
     :log-in (log-in! data (:user message))
     :log-out (log-out! data)
     :get-notes (get-notes! data)
-    :select-note (select-note! data (:id message))))
+    :select-note (select-note! data (:id message))
+    :set-pending-note (set-pending-note! data (:note message))
+    :save-note (save-note! data (:note message))
+    :cancel-note (cancel-note! data)
+    :delete-note (delete-note! data (:id message))
+    :create-note (create-note! data)))

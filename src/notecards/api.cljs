@@ -55,7 +55,7 @@
                                           js/JSON.stringify)})))
         (p/then (fn [response]
                   (let [note (-> response
-                                 js->clj
+                                 (js->clj :keywordize-keys true)
                                  (clojure.set/rename-keys {:_id :id}))]
                     (console/log "created note:" note)
                     note))))))

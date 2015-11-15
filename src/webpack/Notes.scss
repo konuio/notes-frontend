@@ -1,10 +1,28 @@
 @import './variables';
+@import './mixins/actionIcon';
 @import './mixins/body';
 
 .Notes {
   display: flex;
   flex-direction: column;
   padding: $dimen-noteMargin 0;
+
+  &-action {
+    @include enabledPrimaryButton;
+    flex-shrink: 0;
+    height: $dimen-action;
+    width: $dimen-action;
+  }
+
+  &-actionIcon {
+    @include actionIcon;
+  }
+
+  &-actions {
+    display: flex;
+    flex-shrink: 0;
+    padding: 0 $dimen-noteMargin;
+  }
 
   &-body {
     @include body;
@@ -26,6 +44,13 @@
 
   &-note--selected {
     box-shadow: inset -5px 0 0 0 $color-blue;
+  }
+
+  &-notes {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 1px;
   }
 
   &-title {

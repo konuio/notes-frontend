@@ -1,4 +1,4 @@
-(ns notecards.core
+(ns ^:figwheel-always notecards.core
   (:require [devtools.core :as devtools]
             [notecards.app :as app]
             [notecards.app-state :as app-state]

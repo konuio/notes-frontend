@@ -24,7 +24,7 @@
                 (console/log "received message:" message)
                 (app-state/handle-message! data message)
                 (recur))))
-        (routes/define-routes! ch)))
+        (routes/define-routes! #(app-state/post-message! ch %))))
     om/IRenderState
     (render-state [_ state]
       (console/log "rendering:" data)

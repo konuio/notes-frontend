@@ -2,13 +2,13 @@
   (:require [secretary.core :refer-macros [defroute]]
             [cljs.core.async :refer [put!]]))
 
-(defn define-routes! [ch]
+(defn define-routes! [post-message]
   (defroute home-path "/" []
-            (put! ch {:action :set-page
+            (post-message {:action :set-page
                                          :page :home}))
   (defroute login-path "/login" []
-            (put! ch {:action :set-page
+            (post-message {:action :set-page
                                          :page :login}))
   (defroute signup-path "/signup" []
-            (put! ch {:action :set-page
+            (post-message {:action :set-page
                                          :page :signup})))

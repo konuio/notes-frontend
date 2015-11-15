@@ -1,0 +1,6 @@
+@import '../variables';
+@import '../mixins/card';
+
+.loginCard {
+  @include card;
+}

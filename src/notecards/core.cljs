@@ -1,22 +1,23 @@
 (ns notecards.core
   (:require [devtools.core :as devtools]
-            [notecards.api.api]
+            [notecards.api :as api]
+            [notecards.app :as app]
+            [notecards.app-state :as app-state]
+            [notecards.history :as history]
             [notecards.components.button]
             [notecards.components.login]
-            [notecards.components.notes]))
+            [notecards.components.notes]
+            [notecards.components.pages]
+            [om.core :as om]
+            [shodan.console :as console]))
 
 (defonce setup (do
                  (devtools/set-pref! :install-sanity-hints true)
                  (devtools/install!)))
 
-;; define your app data so that it doesn't get over-written on reload
-
-;(defonce app-state (atom {:text "Hello world!"}))
-
-#_(om/root
-    (fn [data _]
-      (reify om/IRender
-        (render [_]
-          (dom/h1 nil (:text data)))))
-    app-state
-    {:target (. js/document (getElementById "content"))})
+(let [content (aget (js/$ "#content") 0)]
+  (if content
+    (om/root
+      app/app
+      app-state/app-state
+      {:target content})))

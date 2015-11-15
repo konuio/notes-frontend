@@ -1,4 +1,4 @@
-(ns notecards.api.api
+(ns notecards.api
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om :include-macros true]
             [sablono.core :as html :refer-macros [html]]
@@ -10,23 +10,21 @@
             [promesa.core :as p]
             [cats.core :as m]))
 
-(defn sign-up [email password]
+(defn sign-up [user]
   (p/promise
     (.ajax js/$ (clj->js {:type "POST"
                           :url "http://localhost:8080/user"
                           :contentType "application/json"
-                          :data (-> {:username email
-                                     :password password}
+                          :data (-> user
                                     clj->js
                                     js/JSON.stringify)}))))
 
-(defn log-in [email password]
+(defn log-in [user]
   (p/promise
     (.ajax js/$ (clj->js {:type "POST"
                           :url "http://localhost:8080/login"
                           :contentType "application/json"
-                          :data (-> {:username email
-                                     :password password}
+                          :data (-> user
                                     clj->js
                                     js/JSON.stringify)}))))
 
@@ -64,14 +62,14 @@
                                         clj->js
                                         js/JSON.stringify)})))))
 
-(defn print-result [promise]
+#_(defn print-result [promise]
   (p/branch promise
             (fn [response]
               (console/log "Response:" response))
             (fn [error]
               (console/log "Error:" error))))
 
-(defn api-tester [{:keys [className]}]
+#_(defn api-tester [{:keys [className]}]
   (om/component
     (html [:div
            {:className (js/classNames "apiTester" className)}
@@ -80,14 +78,16 @@
              {:className "apiTester-button"
               :title "Sign up"
               :on-click (fn []
-                          (-> (sign-up "mking+1" "password")
+                          (-> (sign-up {:username "mking+1"
+                                        :password "password"})
                               print-result))})
            (om/build
              button
              {:className "apiTester-button"
               :title "Log in"
               :on-click (fn []
-                          (-> (log-in "mking+1" "password")
+                          (-> (log-in {:username "mking+1"
+                                       :password "password"})
                               print-result))})
            (om/build
              button
@@ -123,7 +123,7 @@
                                               :data (goog.string.format "Data %d" revision)}))
                               print-result))})])))
 
-(defcard
+#_(defcard
   devcard-api-tester
   (om-root api-tester)
   {:className "devcards-apiTester"})

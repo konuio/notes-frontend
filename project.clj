@@ -16,7 +16,7 @@
                  [binaryage/devtools "0.4.1"]
                  [funcool/promesa "0.5.1"]
                  [funcool/cats "1.0.0"]
-                 ]
+                 [secretary "1.2.3"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0"]]
@@ -26,13 +26,22 @@
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
   :cljsbuild {:builds
-              [{:id "devcards"
+              [{:id "dev"
                 :source-paths ["src"]
-                :figwheel {:devcards true}
+                :figwheel {}
                 :compiler {:main notecards.core
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/notecards.js"
                            :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}
+
+               {:id "devcards"
+                :source-paths ["src"]
+                :figwheel {:devcards true}
+                :compiler {:main notecards.core
+                           :asset-path "js/compiled/devcards_out"
+                           :output-to "resources/public/js/compiled/notecards_devcards.js"
+                           :output-dir "resources/public/js/compiled/devcards_out"
                            :source-map-timestamp true}}
 
                ;; This next build is an compressed minified build for
@@ -46,5 +55,4 @@
                            :pretty-print false}}]}
 
   :figwheel {:server-port 8888
-             :css-dirs ["resources/public/css"] ;; watch and update CSS
-             })
+             :css-dirs ["resources/public/css"]})

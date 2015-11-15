@@ -7,7 +7,7 @@
             [clojure.string]
             [notecards.components.button :refer [button]]))
 
-(defn valid-email [email]
+(defn valid-username [email]
   (re-find #".@." email))
 
 (defn valid-password [password]
@@ -27,7 +27,7 @@
            [:input.field-input {:type type
                                 :defaultValue value}]])))
 
-(defn login [{:keys [email password className]}]
+(defn login [{:keys [username password className]}]
   (om/component
     (html [:div
            {:className (js/classNames "login" className)}
@@ -36,7 +36,7 @@
               field
               {:type "text"
                :className "login-field"
-               :value email
+               :value username
                :label "Email"})
             (om/build
               field
@@ -50,7 +50,7 @@
               {:className "login-actionButton"
                :title "Log In"
                :enabled (and
-                          (valid-email email)
+                          (valid-username username)
                           (valid-password password))})
             (om/build
               button
@@ -58,14 +58,14 @@
                :title "Sign Up"
                :type "transparent"})]])))
 
-(defcard
+#_(defcard
   devcard-login*
   (om-root login)
   {:className "devcards-login"
-   :email ""
+   :username ""
    :password ""})
 
-(defn signup [{:keys [email password confirm className]}]
+(defn signup [{:keys [username password confirm className]}]
   (om/component
     (html [:div
            {:className (js/classNames "login" "login--signup" className)}
@@ -74,7 +74,7 @@
               field
               {:type "text"
                :className "login-field"
-               :value email
+               :value username
                :label "Email"})
             (om/build
               field
@@ -94,7 +94,7 @@
               {:className "login-actionButton"
                :title "Sign Up"
                :enabled (and
-                          (valid-email email)
+                          (valid-username username)
                           (valid-passwords password confirm))})
             (om/build
               button
@@ -102,10 +102,10 @@
                :title "Log In"
                :type "transparent"})]])))
 
-(defcard
+#_(defcard
   devcard-signup
   (om-root signup)
   {:className "devcards-signup"
-   :email ""
+   :username ""
    :password ""
    :confirm ""})

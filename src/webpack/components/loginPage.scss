@@ -1,0 +1,13 @@
+@import '../variables';
+@import '../mixins/pageBackground';
+
+.loginPage {
+  @include pageBackground;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &-card {
+    flex-shrink: 0;
+  }
+}

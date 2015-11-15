@@ -14,7 +14,7 @@
            [:div.noteItem-title title]
            [:div.noteItem-body (subs body 0 (min (count body) 100))]])))
 
-(defcard
+#_(defcard
   devcard-note-item
   (om-root note-item)
   {:className "devcards-noteItem"
@@ -39,7 +39,7 @@
               {:className "noteItems-actionButton"
                :iconClassName "ion-plus"})]])))
 
-(defcard
+#_(defcard
   devcard-note-items*
   (om-root note-items)
   {:className "devcards-noteItems"
@@ -74,15 +74,10 @@
                 :iconClassName "ion-checkmark"
                 :enabled changed})]]])))
 
-(defcard
+#_(defcard
   devcard-note-detail*
   (om-root note-detail)
   {:className "devcards-noteDetail"
    :title "Title..."
    :body (clojure.string/join (repeat 500 "Body "))
    :changed false})
-
-#_(defcard
-  devcard-note-item*
-  (om-root note-item)
-  {:className "devcards-noteItem"})

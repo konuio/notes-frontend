@@ -1,0 +1,9 @@
+@import '../variables';
+@import './shadow';
+
+@mixin card {
+  @include shadow;
+  background-color: $color-card;
+  border-radius: 3px;
+  padding: 40px;
+}

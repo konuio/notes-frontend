@@ -18,7 +18,7 @@
                 {:className (js/classNames "button-icon" "icon" iconClassName)}])
              (if title
                [:div.button-title title])]))))
-
+(comment
 (defcard
   devcard-login-button*
   (om-root button)
@@ -63,3 +63,4 @@
   (om-root button)
   {:className "devcards-button"
    :iconClassName "ion-close"})
+)

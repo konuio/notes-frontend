@@ -1,0 +1,6 @@
+@import '../variables';
+
+@mixin pageBackground {
+  background-image: url(/img/background.png);
+  background-size: cover;
+}

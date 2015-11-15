@@ -57,4 +57,4 @@
                  :on-click (fn [e]
                              (.preventDefault e)
                              (.setToken history/history (routes/login-path)))}
-                "Log in"]]]]))))
+                "Have an account? Log in"]]]]))))

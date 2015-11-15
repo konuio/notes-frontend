@@ -35,7 +35,9 @@
 (defn sign-up! [data user]
   (-> (api/sign-up user)
       (p/then (fn []
-                (om/transact! data #(assoc % :signup default-signup))
+                (om/transact! data #(-> %
+                                        (assoc :signup default-signup)
+                                        (assoc :login (assoc default-login :username (:username user)))))
                 (.setToken history/history (routes/login-path))))))
 
 (defn set-login! [data login]

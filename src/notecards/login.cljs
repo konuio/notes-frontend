@@ -48,4 +48,4 @@
                  :on-click (fn [e]
                              (.preventDefault e)
                              (.setToken history/history (routes/signup-path)))}
-                "Sign up"]]]]))))
+                "Don't have an account? Sign up"]]]]))))

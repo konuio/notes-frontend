@@ -18,7 +18,7 @@
 
 (def default-pending-note {})
 
-(defonce app-state (atom {:page :home
+(defonce app-state (atom {:page nil
                           :signup default-signup
                           :login default-login
                           :notes []

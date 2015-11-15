@@ -5,10 +5,10 @@
 (defn define-routes! [post-message]
   (defroute home-path "/" []
             (post-message {:action :set-page
-                                         :page :home}))
+                           :page :home}))
   (defroute login-path "/login" []
             (post-message {:action :set-page
-                                         :page :login}))
+                           :page :login}))
   (defroute signup-path "/signup" []
             (post-message {:action :set-page
-                                         :page :signup})))
+                           :page :signup})))

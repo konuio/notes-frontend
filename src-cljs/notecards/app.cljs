@@ -5,6 +5,7 @@
             [shodan.console :as console]
             [notecards.app-state :as app-state]
             [notecards.home :as home]
+            [notecards.history :as history]
             [notecards.login :as login]
             [notecards.signup :as signup]
             [notecards.routes :as routes]
@@ -24,12 +25,16 @@
                 (console/log "received message:" message)
                 (app-state/handle-message! data message)
                 (recur))))
-        (routes/define-routes! #(app-state/post-message! ch %))))
+        (routes/define-routes! #(app-state/post-message! ch %))
+        (history/parse-route-and-listen-for-navigation!)))
     om/IRenderState
     (render-state [_ state]
       (console/log "rendering:" data)
-      (html (om/build (case page
-                        :login login/login-page
-                        :signup signup/signup-page
-                        :home home/home-page)
-                      (merge data state))))))
+      (case page
+        :login (html
+                 (om/build login/login-page (merge data state)))
+        :signup (html
+                  (om/build signup/signup-page (merge data state)))
+        :home (html
+                (om/build home/home-page (merge data state)))
+        nil nil))))

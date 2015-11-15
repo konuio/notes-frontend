@@ -16,7 +16,8 @@
                  [binaryage/devtools "0.4.1"]
                  [funcool/promesa "0.5.1"]
                  [funcool/cats "1.0.0"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [ring/ring-core "1.4.0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-1"]]
@@ -27,7 +28,7 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src"]
+                :source-paths ["src-cljs"]
                 :figwheel {}
                 :compiler {:main notecards.core
                            :asset-path "js/compiled/out"
@@ -36,7 +37,7 @@
                            :source-map-timestamp true}}
 
                {:id "devcards"
-                :source-paths ["src"]
+                :source-paths ["src-cljs"]
                 :figwheel {:devcards true}
                 :compiler {:main notecards.devcards.core
                            :asset-path "js/compiled/devcards_out"
@@ -48,11 +49,12 @@
                ;; production. You can build this with:
                ;; lein cljsbuild once min
                {:id "min"
-                :source-paths ["src"]
+                :source-paths ["src-cljs"]
                 :compiler {:output-to "resources/public/js/compiled/notecards.js"
                            :main notecards.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 
   :figwheel {:server-port 8888
-             :css-dirs ["resources/public/css"]})
+             :css-dirs ["resources/public/css"]
+             :ring-handler notecards.server/handler})

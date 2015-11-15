@@ -15,15 +15,16 @@
     (validations/valid-passwords? password confirm)))
 
 (defn signup-page [{:keys [className ch signup]}]
-  (let [{:keys [username password confirm]} signup
-        valid (valid? signup)]
+  (let [{:keys [username password confirm loading]} signup
+        valid (valid? signup)
+        submittable (and (not loading) valid)]
     (om/component
       (html [:div
              {:className (js/classNames "SignupPage" className)}
              [:form.SignupPage-card
               {:on-submit (fn [e]
                             (.preventDefault e)
-                            (if valid
+                            (if submittable
                               (app-state/post-message! ch {:action :sign-up
                                                            :user {:username username
                                                                   :password password}})))}
@@ -54,7 +55,7 @@
                          {:type "submit"
                           :className "SignupPage-signup"
                           :enabledClassName "SignupPage-signup--enabled"
-                          :enabled valid
+                          :enabled submittable
                           :content "Sign up"})
                (om/build button
                          {:className "SignupPage-login"

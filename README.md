@@ -25,4 +25,4 @@ Questions
 
 TODO
 ---
-- Prevent multiple signups if one is in progress. Same for many other requests.
+- Handle request errors

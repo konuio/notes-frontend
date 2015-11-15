@@ -14,16 +14,17 @@
     (validations/valid-password? password)))
 
 (defn login-page [{:keys [className ch login]}]
-  (let [{:keys [username password]} login
+  (let [{:keys [username password loading]} login
         valid (valid? login)
-        focus (if validations/valid-email? :password :username)]
+        submittable (and (not loading) valid)
+        focus (if (validations/valid-email? username) :password :username)]
     (om/component
       (html [:div
              {:className (js/classNames "LoginPage" className)}
              [:form.LoginPage-card
               {:on-submit (fn [e]
                             (.preventDefault e)
-                            (if valid
+                            (if submittable
                               (app-state/post-message! ch {:action :log-in
                                                            :user login})))}
               [:div.LoginPage-field
@@ -47,7 +48,7 @@
                          {:type "submit"
                           :className "LoginPage-login"
                           :enabledClassName "LoginPage-login--enabled"
-                          :enabled valid
+                          :enabled submittable
                           :content "Log in"})
                (om/build button
                          {:className "LoginPage-signup"

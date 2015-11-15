@@ -1,6 +1,7 @@
 @import './variables';
 @import './mixins/body';
 @import './mixins/buttonIcon';
+@import './mixins/disabledPrimaryIconButton';
 @import './mixins/enabledPrimaryIconButton';
 
 .Notes {
@@ -9,8 +10,12 @@
   padding: $dimen-noteMargin 0;
 
   &-action {
-    @include enabledPrimaryIconButton;
+    @include disabledPrimaryIconButton;
     flex-shrink: 0;
+  }
+
+  &-action--enabled {
+    @include enabledPrimaryIconButton;
   }
 
   &-actionIcon {

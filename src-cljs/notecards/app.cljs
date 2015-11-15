@@ -10,20 +10,22 @@
             [notecards.signup :as signup]
             [notecards.routes :as routes]
             [notecards.signup :as signup]
-            [cljs.core.async :refer [chan <!]]))
+            [cljs.core.async :refer [chan <!]]
+            [promesa.core :as p]))
 
 (defn app [{:keys [page] :as data} owner]
   (reify
     om/IInitState
     (init-state [_]
-      {:ch (chan)})
+      {:ch       (chan)
+       :requests {:get-notes (p/promise nil)}})
     om/IWillMount
     (will-mount [_]
       (let [{:keys [ch]} (om/get-state owner)]
         (go (loop []
               (let [message (<! ch)]
                 (console/log "received message:" message)
-                (app-state/handle-message! data message)
+                (app-state/handle-message! data owner message)
                 (recur))))
         (routes/define-routes! #(app-state/post-message! ch %))
         (history/parse-route-and-listen-for-navigation!)))

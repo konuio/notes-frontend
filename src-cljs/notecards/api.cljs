@@ -36,12 +36,13 @@
     (console/log "getting notes")
     (-> (p/promise
           (.ajax js/$ (clj->js {:url "http://localhost:8080/authenticated/note"})))
+        .cancellable
         (p/then (fn [response]
-                  (let [notes (into []
-                                    (map #(clojure.set/rename-keys % {:_id :id}))
-                                    (js->clj response :keywordize-keys true))]
-                    (console/log "got notes:" notes)
-                    notes))))))
+                    (let [notes (into []
+                                      (map #(clojure.set/rename-keys % {:_id :id}))
+                                      (js->clj response :keywordize-keys true))]
+                      (console/log "got notes:" notes)
+                      notes))))))
 
 (defn create-note [note]
   (do

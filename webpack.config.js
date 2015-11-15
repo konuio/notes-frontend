@@ -3,7 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 module.exports = {
-  entry: './src-cljs/webpack/app',
+  entry: './webpack/app',
   output: {
     filename: 'app.js',
     path: path.join(__dirname, 'resources/public/js/compiled')
@@ -13,14 +13,14 @@ module.exports = {
       {
         test: /\.js$/,
         include: [
-          path.join(__dirname, 'src-cljs/webpack')
+          path.join(__dirname, 'webpack')
         ],
         loaders: ['babel']
       },
       {
         test: /\.scss/,
         include: [
-          path.join(__dirname, 'src-cljs/webpack')
+          path.join(__dirname, 'webpack')
         ],
         loader: ExtractTextPlugin.extract('style', ['css', 'postcss', 'sass'].join('!'))
       }

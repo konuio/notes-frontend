@@ -1,5 +1,5 @@
 (ns notecards.server
     (:require [ring.util.response :as response]))
 
-(defn handler []
-      (response/file-response "index.html" {:root "public"}))
+(defn handler [request]
+      (response/file-response "index.html" {:root "resources/public"}))

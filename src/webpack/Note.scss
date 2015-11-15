@@ -1,6 +1,6 @@
 @import './variables';
-@import './mixins/actionIcon';
 @import './mixins/body';
+@import './mixins/buttonIcon';
 @import './mixins/disabledPrimaryIconButton';
 @import './mixins/enabledPrimaryIconButton';
 @import './mixins/marker';
@@ -31,7 +31,7 @@
   }
 
   &-actionIcon {
-    @include actionIcon;
+    @include buttonIcon;
   }
 
   &-actions {

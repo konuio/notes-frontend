@@ -1,0 +1,21 @@
+@import '../variables';
+@import '../mixins/devcardBorder';
+@import '../mixins/fieldInput';
+@import '../mixins/fieldLabel';
+
+.FieldDevcards {
+  &-field {
+    @include devcardBorder;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
+
+  &-input {
+    @include fieldInput;
+  }
+
+  &-label {
+    @include fieldLabel;
+  }
+}

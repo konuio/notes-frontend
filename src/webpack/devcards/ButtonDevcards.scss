@@ -1,0 +1,33 @@
+@import '../variables';
+@import '../mixins/buttonIcon';
+@import '../mixins/disabledPrimaryButton';
+@import '../mixins/disabledPrimaryIconButton';
+@import '../mixins/enabledPrimaryButton';
+@import '../mixins/enabledPrimaryIconButton';
+@import '../mixins/secondaryButton';
+
+.ButtonDevcards {
+  &-enabledPrimaryButton {
+    @include enabledPrimaryButton;
+  }
+
+  &-enabledPrimaryIconButton {
+    @include enabledPrimaryIconButton;
+  }
+
+  &-disabledPrimaryButton {
+    @include disabledPrimaryButton;
+  }
+
+  &-disabledPrimaryIconButton {
+    @include disabledPrimaryIconButton;
+  }
+
+  &-icon {
+    @include buttonIcon;
+  }
+
+  &-secondaryButton {
+    @include secondaryButton;
+  }
+}

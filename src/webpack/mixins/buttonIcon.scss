@@ -1,7 +1,7 @@
 @import '../variables';
 @import './resetText';
 
-@mixin actionIcon {
+@mixin buttonIcon {
   @include resetText;
   font-size: 14px;
 }

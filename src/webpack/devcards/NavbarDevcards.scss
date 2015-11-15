@@ -1,0 +1,15 @@
+@import '../variables';
+@import '../mixins/navbarButton';
+
+.NavbarDevcards {
+  &-button {
+    @include navbarButton;
+  }
+
+  &-navbar {
+    background-color: $color-navbar;
+    display: flex;
+    justify-content: flex-end;
+    padding: $dimen-navbarMargin;
+  }
+}

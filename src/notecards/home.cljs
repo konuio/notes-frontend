@@ -48,6 +48,13 @@
     (render [_]
       (html [:div
              {:className (js/classNames "HomePage" className)}
+             [:div.HomePage-navbar
+              [:button.HomePage-button
+               {:type "button"
+                :on-click (fn [e]
+                            (.preventDefault e)
+                            (app-state/post-message! ch {:action :log-out}))}
+               "Log out"]]
              [:div.HomePage-card
               (om/build notes-view {:className "HomePage-column"
                                     :ch ch

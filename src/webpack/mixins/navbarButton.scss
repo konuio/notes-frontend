@@ -1,0 +1,8 @@
+@import '../variables';
+@import './secondaryButton';
+
+@mixin navbarButton {
+  @include secondaryButton;
+  color: white;
+  padding: 0;
+}

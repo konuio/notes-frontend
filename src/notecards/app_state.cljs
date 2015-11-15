@@ -47,6 +47,10 @@
                 (om/transact! data #(assoc % :login default-login))
                 (.setToken history/history (routes/home-path)))))
 
+(defn log-out! [data]
+  ; TODO Actually send the logout request. Right now we just go to the login page.
+  (.setToken history/history (routes/login-path)))
+
 (defn get-notes! [data]
   (-> (api/get-notes)
       (p/then (fn [notes]
@@ -66,5 +70,6 @@
     :sign-up (sign-up! data (:user message))
     :set-login (set-login! data (:login message))
     :log-in (log-in! data (:user message))
+    :log-out (log-out! data)
     :get-notes (get-notes! data)
     :select-note (select-note! data (:id message))))

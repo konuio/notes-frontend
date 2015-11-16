@@ -39,7 +39,7 @@
                {:id "devcards"
                 :source-paths ["src-cljs"]
                 :figwheel {:devcards true}
-                :compiler {:main notecards.devcards.core
+                :compiler {:main notecards.cards.core
                            :asset-path "js/compiled/devcards_out"
                            :output-to "resources/public/js/compiled/notecards_devcards.js"
                            :output-dir "resources/public/js/compiled/devcards_out"

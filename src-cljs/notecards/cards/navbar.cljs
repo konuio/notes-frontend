@@ -1,4 +1,4 @@
-(ns notecards.devcards.navbar
+(ns notecards.cards.navbar
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
@@ -8,8 +8,8 @@
 (defcard navbar
          (om-root (fn [data]
                     (om/component
-                      (html [:div.NavbarDevcards-navbar
+                      (html [:div.NavbarCards-navbar
                              (om/build
                                button
-                               {:className "NavbarDevcards-button"
+                               {:className "NavbarCards-button"
                                 :content "Log out"})])))))

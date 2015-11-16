@@ -1,4 +1,4 @@
-(ns notecards.devcards.fields
+(ns notecards.cards.fields
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
@@ -7,7 +7,7 @@
 (defcard field
          (om-root (fn [data]
                     (om/component
-                      (html [:div.FieldDevcards-field
-                             [:label.FieldDevcards-label "Email"]
-                             [:input.FieldDevcards-input {:type "text"
+                      (html [:div.FieldCards-field
+                             [:label.FieldCards-label "Email"]
+                             [:input.FieldCards-input {:type "text"
                                                           :defaultValue ""}]])))))

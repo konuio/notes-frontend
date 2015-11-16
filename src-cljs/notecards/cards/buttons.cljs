@@ -1,4 +1,4 @@
-(ns notecards.devcards.buttons
+(ns notecards.cards.buttons
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
@@ -7,12 +7,12 @@
 
 (defcard enabled
          (om-root button)
-         {:className "ButtonDevcards-enabledPrimaryButton"
+         {:className "ButtonCards-enabledPrimaryButton"
           :content "Button"})
 
 (defcard disabled
          (om-root button)
-         {:className "ButtonDevcards-disabledPrimaryButton"
+         {:className "ButtonCards-disabledPrimaryButton"
           :content "Button"})
 
 (defcard enabled-icon
@@ -20,18 +20,18 @@
                     (om/component
                       (om/build
                         button
-                        {:className "ButtonDevcards-enabledPrimaryIconButton"
-                         :content [:i.ButtonDevcards-icon.icon.ion-checkmark]})))))
+                        {:className "ButtonCards-enabledPrimaryIconButton"
+                         :content [:i.ButtonCards-icon.icon.ion-checkmark]})))))
 
 (defcard disabled-icon
          (om-root (fn [data]
                     (om/component
                       (om/build
                         button
-                        {:className "ButtonDevcards-disabledPrimaryIconButton"
-                         :content [:i.ButtonDevcards-icon.icon.ion-checkmark]})))))
+                        {:className "ButtonCards-disabledPrimaryIconButton"
+                         :content [:i.ButtonCards-icon.icon.ion-checkmark]})))))
 
 (defcard secondary
          (om-root button)
-         {:className "ButtonDevcards-secondaryButton"
+         {:className "ButtonCards-secondaryButton"
           :content "Button"})

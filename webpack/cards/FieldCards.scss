@@ -3,7 +3,7 @@
 @import '../mixins/fieldInput';
 @import '../mixins/fieldLabel';
 
-.FieldDevcards {
+.FieldCards {
   &-field {
     @include devcardBorder;
     display: flex;

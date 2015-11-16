@@ -1,7 +1,8 @@
 @import './reset';
-@import './devcards/ButtonDevcards';
-@import './devcards/FieldDevcards';
-@import './devcards/NavbarDevcards';
+@import './cards/ButtonCards';
+@import './cards/FieldCards';
+@import './cards/NavbarCards';
+@import './cards/TooltipCards';
 @import './components/ErrorMessage';
 @import './components/HomePage';
 @import './components/LoginPage';

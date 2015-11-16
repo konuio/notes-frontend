@@ -1,0 +1,28 @@
+@import '../variables';
+@import '../mixins/resetButton';
+
+.ChannelCards {
+  &-button {
+    @include resetButton;
+    border-radius: $dimen-borderRadius;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+  }
+
+  &-button--blue {
+    background-color: blue;
+
+    &:hover {
+      background-color: scale-color(blue, $lightness: -15%);
+    }
+  }
+
+  &-button--red {
+    background-color: red;
+
+    &:hover {
+      background-color: scale-color(red, $lightness: -15%);
+    }
+  }
+}

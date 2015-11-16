@@ -17,7 +17,8 @@
                  [funcool/promesa "0.5.1"]
                  [funcool/cats "1.0.0"]
                  [secretary "1.2.3"]
-                 [ring/ring-core "1.4.0"]]
+                 [ring "1.4.0"]
+                 [compojure "1.4.0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-1"]]

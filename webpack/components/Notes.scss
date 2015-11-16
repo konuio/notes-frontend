@@ -46,16 +46,12 @@
     padding: 10px $dimen-noteMargin;
 
     &:hover {
-      box-shadow: inset -5px 0 0 0 $color-blue;
-    }
-
-    &:not(:first-child) {
-      margin-top: 20px;
+      background-color: $color-selected;
     }
   }
 
   &-note--selected {
-    box-shadow: inset -5px 0 0 0 $color-blue;
+    background-color: $color-selected;
   }
 
   &-notes {

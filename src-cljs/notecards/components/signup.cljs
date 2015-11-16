@@ -1,9 +1,9 @@
-(ns notecards.signup
+(ns notecards.components.signup
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
             [notecards.app-state :as app-state]
-            [notecards.buttons :refer [button]]
+            [notecards.components.buttons :refer [button]]
             [notecards.history :as history]
             [notecards.routes :as routes]
             [notecards.validations :as validations]

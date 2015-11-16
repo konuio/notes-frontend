@@ -1,11 +1,11 @@
-@import './variables';
-@import './mixins/body';
-@import './mixins/buttonIcon';
-@import './mixins/disabledPrimaryIconButton';
-@import './mixins/enabledPrimaryIconButton';
-@import './mixins/marker';
-@import './mixins/resetInput';
-@import './mixins/resetTextArea';
+@import '../variables';
+@import '../mixins/body';
+@import '../mixins/buttonIcon';
+@import '../mixins/disabledPrimaryIconButton';
+@import '../mixins/enabledPrimaryIconButton';
+@import '../mixins/marker';
+@import '../mixins/resetInput';
+@import '../mixins/resetTextArea';
 
 .Note {
   display: flex;

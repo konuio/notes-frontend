@@ -1,0 +1,9 @@
+@import '../variables';
+@import './body';
+
+@mixin tooltipText {
+  @include body;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+}

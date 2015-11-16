@@ -1,0 +1,19 @@
+@import '../variables';
+@import '../mixins/tooltipText';
+
+.Tooltip {
+  @include tooltipText;
+  background-color: $color-tooltip;
+  border-radius: $dimen-borderRadius;
+  display: inline-block;
+  padding: 10px;
+
+  &-arrow {
+    bottom: -6px;
+    left: calc(50% - 6px);
+    fill: $color-black;
+    position: absolute;
+    height: 6px;
+    width: 12px;
+  }
+}

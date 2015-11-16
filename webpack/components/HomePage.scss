@@ -1,7 +1,8 @@
-@import './variables';
-@import './mixins/card';
-@import './mixins/page';
-@import './mixins/navbarButton';
+@import '../variables';
+@import '../mixins/card';
+@import '../mixins/page';
+@import '../mixins/navbarButton';
+@import '../mixins/tooltips';
 
 .HomePage {
   @include page;
@@ -45,5 +46,9 @@
     flex-shrink: 0;
     justify-content: flex-end;
     padding: $dimen-navbarMargin;
+  }
+
+  &-tooltips {
+    @include tooltips;
   }
 }

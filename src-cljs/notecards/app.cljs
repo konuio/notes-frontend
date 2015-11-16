@@ -4,12 +4,11 @@
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
             [notecards.app-state :as app-state]
-            [notecards.home :as home]
+            [notecards.components.home :as home]
+            [notecards.components.login :as login]
+            [notecards.components.signup :as signup]
             [notecards.history :as history]
-            [notecards.login :as login]
-            [notecards.signup :as signup]
             [notecards.routes :as routes]
-            [notecards.signup :as signup]
             [cljs.core.async :refer [chan <!]]
             [promesa.core :as p]))
 
@@ -18,13 +17,14 @@
     om/IInitState
     (init-state [_]
       {:ch       (chan)
-       :requests {:get-notes (p/promise nil)}})
+       :requests {:get-notes (p/promise nil)}
+       :tooltip nil})
     om/IWillMount
     (will-mount [_]
       (let [{:keys [ch]} (om/get-state owner)]
         (go (loop []
               (let [message (<! ch)]
-                (console/log "received message:" message)
+                (console/log "received message:" (:action message))
                 (app-state/handle-message! data owner message)
                 (recur))))
         (routes/define-routes! #(app-state/post-message! ch %))
@@ -32,11 +32,12 @@
     om/IRenderState
     (render-state [_ state]
       (console/log "rendering:" data)
-      (case page
-        :login (html
-                 (om/build login/login-page (merge data state)))
-        :signup (html
-                  (om/build signup/signup-page (merge data state)))
-        :home (html
-                (om/build home/home-page (merge data state)))
-        nil nil))))
+      (html [:div
+             (case page
+               :login (html
+                        (om/build login/login-page (merge data state)))
+               :signup (html
+                         (om/build signup/signup-page (merge data state)))
+               :home (html
+                       (om/build home/home-page (merge data state)))
+               nil nil)]))))

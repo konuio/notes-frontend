@@ -115,6 +115,12 @@
                                          (assoc-in [:home :selected] (:id note))
                                          (assoc-in [:home :loading] false))))))))
 
+(defn show-tooltip! [owner tooltip]
+  (om/set-state! owner :tooltip tooltip))
+
+(defn hide-tooltip! [owner]
+  (om/set-state! owner :tooltip nil))
+
 (defn post-message! [ch message]
   (put! ch message))
 
@@ -132,4 +138,6 @@
     :save-note (save-note! data (:note message))
     :cancel-note (cancel-note! data)
     :delete-note (delete-note! data (:id message))
-    :create-note (create-note! data)))
+    :create-note (create-note! data)
+    :show-tooltip (show-tooltip! owner (:tooltip message))
+    :hide-tooltip (hide-tooltip! owner)))

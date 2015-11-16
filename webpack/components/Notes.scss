@@ -1,8 +1,8 @@
-@import './variables';
-@import './mixins/body';
-@import './mixins/buttonIcon';
-@import './mixins/disabledPrimaryIconButton';
-@import './mixins/enabledPrimaryIconButton';
+@import '../variables';
+@import '../mixins/body';
+@import '../mixins/buttonIcon';
+@import '../mixins/disabledPrimaryIconButton';
+@import '../mixins/enabledPrimaryIconButton';
 
 .Notes {
   display: flex;

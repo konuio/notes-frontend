@@ -3,7 +3,7 @@
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.buttons :refer [button]]))
+            [notecards.components.buttons :refer [button]]))
 
 (defcard navbar
          (om-root (fn [data]

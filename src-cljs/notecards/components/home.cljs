@@ -1,9 +1,10 @@
-(ns notecards.home
+(ns notecards.components.home
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
             [notecards.app-state :as app-state]
-            [notecards.buttons :refer [button]]
+            [notecards.components.buttons :refer [button]]
+            [notecards.components.tooltips :refer [tooltip]]
             [notecards.history :as history]
             [notecards.routes :as routes]
             [notecards.utils :refer [truncate find-first]]))
@@ -50,7 +51,15 @@
                          :enabled createable
                          :content [:i.Notes-actionIcon.icon.ion-plus]
                          :on-click (fn [e]
-                                     (app-state/post-message! ch {:action :create-note}))})]]))))
+                                     (app-state/post-message! ch {:action :create-note}))
+                         :on-mouse-enter (fn [e]
+                                           (app-state/post-message! ch {:action :show-tooltip
+                                                                        :tooltip {:component (om/build tooltip {:content "Create new note"
+                                                                                                                :target-rect (.getBoundingClientRect e.currentTarget)})
+                                                                                  :predicate (fn [data]
+                                                                                               (not (get-in [:home :loading] data)))}}))
+                         :on-mouse-leave (fn [e]
+                                           (app-state/post-message! ch {:action :hide-tooltip}))})]]))))
 
 (defn note-view [{:keys [className ch note pending loading]}]
   (let [working-note (merge note pending)
@@ -88,7 +97,17 @@
                              :content [:i.Note-actionIcon.icon.ion-trash-b]
                              :on-click (fn [e]
                                          (app-state/post-message! ch {:action :delete-note
-                                                                      :id     (:id working-note)}))})]
+                                                                      :id     (:id working-note)}))
+                             :on-mouse-enter (fn [e]
+                                               (app-state/post-message! ch {:action :show-tooltip
+                                                                            :tooltip {:component (om/build tooltip {:content "Delete this note"
+                                                                                                                    :target-rect (.getBoundingClientRect e.currentTarget)})
+                                                                                      :predicate (fn [data]
+                                                                                                   (let [{:keys [home]} data
+                                                                                                         {:keys [selected loading]} home]
+                                                                                                     (and selected (not loading))))}}))
+                             :on-mouse-leave (fn [e]
+                                               (app-state/post-message! ch {:action :hide-tooltip}))})]
                  [:div.Note-actionGroup
                   (om/build button
                             {:className "Note-action"
@@ -96,7 +115,17 @@
                              :enabled editable
                              :content [:i.Note-actionIcon.icon.ion-close]
                              :on-click (fn [e]
-                                         (app-state/post-message! ch {:action :cancel-note}))})
+                                         (app-state/post-message! ch {:action :cancel-note}))
+                             :on-mouse-enter (fn [e]
+                                               (app-state/post-message! ch {:action :show-tooltip
+                                                                            :tooltip {:component (om/build tooltip {:content "Cancel changes"
+                                                                                                                    :target-rect (.getBoundingClientRect e.currentTarget)})
+                                                                                      :predicate (fn [data]
+                                                                                                   (let [{:keys [home]} data
+                                                                                                         {:keys [selected loading pending]} home]
+                                                                                                     (and selected (not loading) (seq pending))))}}))
+                             :on-mouse-leave (fn [e]
+                                               (app-state/post-message! ch {:action :hide-tooltip}))})
                   (om/build button
                             {:className "Note-action"
                              :enabledClassName "Note-action--enabled"
@@ -104,7 +133,17 @@
                              :content [:i.Note-actionIcon.icon.ion-checkmark]
                              :on-click (fn [e]
                                          (app-state/post-message! ch {:action :save-note
-                                                                      :note   working-note}))})]]]
+                                                                      :note   working-note}))
+                             :on-mouse-enter (fn [e]
+                                               (app-state/post-message! ch {:action :show-tooltip
+                                                                            :tooltip {:component (om/build tooltip {:content "Save changes"
+                                                                                                                    :target-rect (.getBoundingClientRect e.currentTarget)})
+                                                                                      :predicate (fn [data]
+                                                                                                   (let [{:keys [home]} data
+                                                                                                         {:keys [selected loading pending]} home]
+                                                                                                     (and selected (not loading) (seq pending))))}}))
+                             :on-mouse-leave (fn [e]
+                                               (app-state/post-message! ch {:action :hide-tooltip}))})]]]
                [:div.Note-empty
                 (om/build
                   error-message
@@ -112,7 +151,7 @@
                    :title "No note selected"
                    :subtitle "Select a note on the left to get started."})])]))))
 
-(defn home-page [{:keys [className ch notes home]}]
+(defn home-page [{:keys [className ch notes home tooltip] :as data}]
   (let [{:keys [selected pending loading]} home]
     (reify
       om/IWillMount
@@ -140,4 +179,7 @@
                                        :ch ch
                                        :note (find-first #(= (:id %) selected) notes)
                                        :pending pending
-                                       :loading loading}))]])))))
+                                       :loading loading}))]
+               [:div.HomePage-tooltips
+                (if (and tooltip ((:predicate tooltip) data))
+                  (:component tooltip))]])))))

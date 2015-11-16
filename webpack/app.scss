@@ -2,9 +2,10 @@
 @import './devcards/ButtonDevcards';
 @import './devcards/FieldDevcards';
 @import './devcards/NavbarDevcards';
-@import './ErrorMessage';
-@import './HomePage';
-@import './LoginPage';
-@import './Note';
-@import './Notes';
-@import './SignupPage';
+@import './components/ErrorMessage';
+@import './components/HomePage';
+@import './components/LoginPage';
+@import './components/Note';
+@import './components/Notes';
+@import './components/SignupPage';
+@import './components/Tooltip';

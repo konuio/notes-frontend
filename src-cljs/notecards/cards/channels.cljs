@@ -15,17 +15,20 @@
        :c2 (chan)})
     om/IWillMount
     (will-mount [_]
-      (let [{:keys [c1 c2]} (om/get-state owner)]
+      (let [{:keys [c1 c2]} (om/get-state owner)
+            mix-ch (chan)
+            mix (async/mix mix-ch)]
+        (async/admix mix c1)
+        (async/admix mix c2)
         (go (loop []
-              (let [[message ch] (alts! [c1 c2])]
-                (cond
-                  (= ch c1) (console/log "c1:" message)
-                  (= ch c2) (console/log "c2:" message))
+              (let [message (<! mix-ch)]
+                (console/log "received:" message)
                 (recur))))))
     om/IRenderState
     (render-state [_ state]
       (let [{:keys [c1 c2]} state]
         (html [:div
+               ; TODO mute/pause selector for c1
                [:div
                 [:button
                  {:type     "button"
@@ -33,7 +36,7 @@
                               (go
                                 (doseq [i (range 10)]
                                   (put! c1 i)
-                                  (<! (timeout 500)))))}
+                                  (<! (timeout 100)))))}
                  "Send to c1"]]
                [:div
                 [:button
@@ -41,8 +44,8 @@
                   :on-click (fn [e]
                               (go
                                 (doseq [i (range 10)]
-                                  (put! c2 i)
-                                  (<! (timeout 500)))))}
+                                  (put! c2 (+ 10 i))
+                                  (<! (timeout 100)))))}
                  "Send to c2"]]])))))
 
 (defcard put-card (om-root put-view))

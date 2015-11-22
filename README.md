@@ -16,13 +16,3 @@ rlwrap lein figwheel dev devcards
 
 # Visit http://localhost:8888
 ```
-
-Questions
----
-- om: Is there a way to notify the action creator of the result of an action? For example, if signup succeeds, I want to redirect to the login page.
-- om: How do I set React children? [This doesn't work.](https://github.com/omcljs/om/issues/291)
-- sablono: How can I do `(if pred vector)` with sablono?
-
-TODO
----
-- Handle request errors

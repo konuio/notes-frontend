@@ -7,7 +7,8 @@
             [notecards.components.tooltips :refer [tooltip]]
             [notecards.history :as history]
             [notecards.routes :as routes]
-            [notecards.utils :refer [truncate find-first]]))
+            [notecards.utils :refer [truncate find-first]]
+            [notecards.app-storage :as app-storage]))
 
 (defn error-message [{:keys [className title subtitle]}]
   (om/component
@@ -156,7 +157,11 @@
     (reify
       om/IWillMount
       (will-mount [_]
-        (app-state/post-message! ch {:action :get-notes}))
+        (let [token (app-storage/get-token)]
+          (if token
+            (app-state/post-message! ch {:action :get-notes
+                                         :token token})
+            (.setToken history/history (routes/login-path)))))
       om/IRender
       (render [_]
         (html [:div

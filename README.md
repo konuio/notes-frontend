@@ -12,7 +12,7 @@ nvm use
 npm start
 
 # Run app
-rlwrap lein figwheel dev devcards
+rlwrap lein figwheel
 
 # Visit http://localhost:8888
 ```

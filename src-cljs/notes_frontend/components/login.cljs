@@ -1,12 +1,12 @@
-(ns notecards.components.login
+(ns notes-frontend.components.login
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.components.buttons :refer [button]]
-            [notecards.history :as history]
-            [notecards.routes :as routes]
-            [notecards.validations :as validations]
-            [notecards.app-state :as app-state]))
+            [notes-frontend.components.buttons :refer [button]]
+            [notes-frontend.history :as history]
+            [notes-frontend.routes :as routes]
+            [notes-frontend.validations :as validations]
+            [notes-frontend.app-state :as app-state]))
 
 (defn- valid? [{:keys [username password]}]
   (and

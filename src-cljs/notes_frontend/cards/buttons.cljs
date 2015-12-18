@@ -1,9 +1,9 @@
-(ns notecards.cards.buttons
+(ns notes-frontend.cards.buttons
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.components.buttons :refer [button]]))
+            [notes-frontend.components.buttons :refer [button]]))
 
 (defcard enabled
          (om-root button)

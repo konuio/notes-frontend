@@ -1,4 +1,4 @@
-(ns notecards.server
+(ns notes-frontend.server
     (:require [ring.util.response :as response]
               [compojure.core :refer [routes GET]]
               [compojure.route :as route]))

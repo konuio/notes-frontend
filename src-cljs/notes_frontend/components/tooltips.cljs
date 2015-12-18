@@ -1,4 +1,4 @@
-(ns notecards.components.tooltips
+(ns notes-frontend.components.tooltips
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]))

@@ -1,12 +1,12 @@
-(ns notecards.components.signup
+(ns notes-frontend.components.signup
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.app-state :as app-state]
-            [notecards.components.buttons :refer [button]]
-            [notecards.history :as history]
-            [notecards.routes :as routes]
-            [notecards.validations :as validations]
+            [notes-frontend.app-state :as app-state]
+            [notes-frontend.components.buttons :refer [button]]
+            [notes-frontend.history :as history]
+            [notes-frontend.routes :as routes]
+            [notes-frontend.validations :as validations]
             [promesa.core :as p]))
 
 (defn- valid? [{:keys [username password confirm]}]

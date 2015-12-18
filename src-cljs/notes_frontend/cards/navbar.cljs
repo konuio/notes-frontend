@@ -1,9 +1,9 @@
-(ns notecards.cards.navbar
+(ns notes-frontend.cards.navbar
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.components.buttons :refer [button]]))
+            [notes-frontend.components.buttons :refer [button]]))
 
 (defcard navbar
          (om-root (fn [data]

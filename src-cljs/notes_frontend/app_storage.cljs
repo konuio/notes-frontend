@@ -1,4 +1,4 @@
-(ns notecards.app-storage)
+(ns notes-frontend.app-storage)
 
 (def token-key "token")
 

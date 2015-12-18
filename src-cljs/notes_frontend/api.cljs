@@ -1,4 +1,4 @@
-(ns notecards.api
+(ns notes-frontend.api
   (:require [shodan.console :as console]
             [goog.string.format]
             [promesa.core :as p]))

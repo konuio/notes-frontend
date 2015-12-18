@@ -1,4 +1,4 @@
-(ns notecards.cards.channels
+(ns notes-frontend.cards.channels
   (:require-macros [devcards.core :refer [defcard om-root]]
                    [cljs.core.async.macros :refer [go alt!]])
   (:require [om.core :as om]

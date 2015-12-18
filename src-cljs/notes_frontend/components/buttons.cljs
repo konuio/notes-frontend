@@ -1,4 +1,4 @@
-(ns notecards.components.buttons
+(ns notes-frontend.components.buttons
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]))
 

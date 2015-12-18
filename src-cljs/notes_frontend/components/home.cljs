@@ -1,14 +1,14 @@
-(ns notecards.components.home
+(ns notes-frontend.components.home
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.app-state :as app-state]
-            [notecards.components.buttons :refer [button]]
-            [notecards.components.tooltips :refer [tooltip]]
-            [notecards.history :as history]
-            [notecards.routes :as routes]
-            [notecards.utils :refer [truncate find-first]]
-            [notecards.app-storage :as app-storage]))
+            [notes-frontend.app-state :as app-state]
+            [notes-frontend.components.buttons :refer [button]]
+            [notes-frontend.components.tooltips :refer [tooltip]]
+            [notes-frontend.history :as history]
+            [notes-frontend.routes :as routes]
+            [notes-frontend.utils :refer [truncate find-first]]
+            [notes-frontend.app-storage :as app-storage]))
 
 (defn error-message [{:keys [className title subtitle]}]
   (om/component

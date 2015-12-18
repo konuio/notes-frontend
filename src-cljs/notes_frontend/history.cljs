@@ -1,4 +1,4 @@
-(ns notecards.history
+(ns notes-frontend.history
   (:require [shodan.console :as console]
             [secretary.core :as secretary]
             [goog.history.EventType]

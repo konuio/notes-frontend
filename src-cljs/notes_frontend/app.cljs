@@ -1,14 +1,14 @@
-(ns notecards.app
+(ns notes-frontend.app
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]
             [shodan.console :as console]
-            [notecards.app-state :as app-state]
-            [notecards.components.home :as home]
-            [notecards.components.login :as login]
-            [notecards.components.signup :as signup]
-            [notecards.history :as history]
-            [notecards.routes :as routes]
+            [notes-frontend.app-state :as app-state]
+            [notes-frontend.components.home :as home]
+            [notes-frontend.components.login :as login]
+            [notes-frontend.components.signup :as signup]
+            [notes-frontend.history :as history]
+            [notes-frontend.routes :as routes]
             [cljs.core.async :refer [chan <!]]
             [promesa.core :as p]))
 

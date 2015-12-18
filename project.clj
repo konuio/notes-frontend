@@ -1,4 +1,4 @@
-(defproject notecards "1.0.0-SNAPSHOT"
+(defproject notes-frontend "1.0.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -31,18 +31,18 @@
               [{:id "dev"
                 :source-paths ["src-cljs"]
                 :figwheel {}
-                :compiler {:main notecards.core
+                :compiler {:main notes-frontend.core
                            :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/notecards.js"
+                           :output-to "resources/public/js/compiled/notes_frontend.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true}}
 
                {:id "devcards"
                 :source-paths ["src-cljs"]
                 :figwheel {:devcards true}
-                :compiler {:main notecards.cards.core
+                :compiler {:main notes-frontend.cards.core
                            :asset-path "js/compiled/devcards_out"
-                           :output-to "resources/public/js/compiled/notecards_devcards.js"
+                           :output-to "resources/public/js/compiled/notes_frontend_devcards.js"
                            :output-dir "resources/public/js/compiled/devcards_out"
                            :source-map-timestamp true}}
 
@@ -51,11 +51,11 @@
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src-cljs"]
-                :compiler {:output-to "resources/public/js/compiled/notecards.js"
-                           :main notecards.core
+                :compiler {:output-to "resources/public/js/compiled/notes_frontend.js"
+                           :main notes-frontend.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 
   :figwheel {:server-port 8888
              :css-dirs ["resources/public/css"]
-             :ring-handler notecards.server/handler})
+             :ring-handler notes-frontend.server/handler})

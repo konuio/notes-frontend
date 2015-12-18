@@ -1,4 +1,4 @@
-(ns notecards.validations)
+(ns notes-frontend.validations)
 
 (defn valid-email? [email]
   (re-find #".@." email))

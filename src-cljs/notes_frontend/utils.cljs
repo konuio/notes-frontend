@@ -1,4 +1,4 @@
-(ns notecards.utils
+(ns notes-frontend.utils
   (:require [shodan.console :as console]))
 
 (defn truncate [s n]

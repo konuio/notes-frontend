@@ -1,14 +1,14 @@
-(ns notecards.app-state
+(ns notes-frontend.app-state
   (:require [om.core :as om]
             [shodan.console :as console]
             [cljs.core.async :refer [put!]]
             [goog.string.format]
             [promesa.core :as p]
-            [notecards.api :as api]
-            [notecards.app-storage :as app-storage]
-            [notecards.history :as history]
-            [notecards.routes :as routes]
-            [notecards.utils :refer [find-index]]))
+            [notes-frontend.api :as api]
+            [notes-frontend.app-storage :as app-storage]
+            [notes-frontend.history :as history]
+            [notes-frontend.routes :as routes]
+            [notes-frontend.utils :refer [find-index]]))
 
 (def default-signup {:username ""
                      :password ""

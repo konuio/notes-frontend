@@ -1,7 +1,7 @@
-(ns ^:figwheel-always notecards.core
+(ns ^:figwheel-always notes-frontend.core
   (:require [devtools.core :as devtools]
-            [notecards.app :as app]
-            [notecards.app-state :as app-state]
+            [notes-frontend.app :as app]
+            [notes-frontend.app-state :as app-state]
             [om.core :as om]))
 
 (defonce setup (do

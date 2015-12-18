@@ -1,4 +1,4 @@
-(ns notecards.cards.fields
+(ns notes-frontend.cards.fields
   (:require-macros [devcards.core :refer [defcard om-root]])
   (:require [om.core :as om]
             [sablono.core :refer-macros [html]]

@@ -1,4 +1,4 @@
-(ns notecards.routes
+(ns notes-frontend.routes
   (:require [secretary.core :refer-macros [defroute]]
             [cljs.core.async :refer [put!]]))
 

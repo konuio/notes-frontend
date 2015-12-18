@@ -15,7 +15,7 @@
     (validations/valid-passwords? password confirm)))
 
 (defn signup-page [{:keys [className ch signup]}]
-  (let [{:keys [username password confirm loading]} signup
+  (let [{:keys [username password confirm error loading]} signup
         valid (valid? signup)
         submittable (and (not loading) valid)]
     (om/component
@@ -27,6 +27,7 @@
                             (if submittable
                               (app-state/post-message! ch {:action :sign-up
                                                            :user {:username username
+                                                                  :email username
                                                                   :password password}})))}
               [:div.SignupPage-field
                [:label.SignupPage-label "Email"]
@@ -50,6 +51,10 @@
                                          :on-change (fn [e]
                                                       (app-state/post-message! ch {:action :set-signup
                                                                                    :signup (assoc signup :confirm e.currentTarget.value)}))}]]
+              (if error
+                [:div.SignupPage-error (get {"duplicate-username" "Username is already registered."
+                                             "duplicate-email" "Email is already registered."}
+                                            error)])
               [:div.SignupPage-actions
                (om/build button
                          {:type "submit"
@@ -63,3 +68,24 @@
                           :on-click (fn [e]
                                       (.preventDefault e)
                                       (.setToken history/history (routes/login-path)))})]]]))))
+
+(defn signup-pending-page [{:keys [className]}]
+  (om/component
+    (html [:div
+           {:className (js/classNames "SignupPendingPage" className)}
+           [:div.SignupPendingPage-card
+            [:div.SignupPendingPage-title
+             "Thanks for signing up!"]
+            [:div.SignupPendingPage-subtitle
+             "Please check your email for a verification message."]]])))
+
+(defn redeem-signup-page [{:keys [ch className token]}]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (app-state/post-message! ch {:action :redeem-signup
+                                   :token token}))
+    om/IRender
+    (render [_]
+      (html [:div
+             {:className (js/classNames "RedeemSignupPage" className)}]))))

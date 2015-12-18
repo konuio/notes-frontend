@@ -27,6 +27,12 @@
     width: 500px;
   }
 
+  &-error {
+    @include body;
+    color: $color-red;
+    margin-top: 10px;
+  }
+
   &-field {
     display: flex;
     flex-direction: column;

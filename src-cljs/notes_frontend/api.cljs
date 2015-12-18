@@ -10,14 +10,14 @@
   (console/log "signing up:" user)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "POST"
-                              :url "http://localhost:8080/user"
+                              :url "http://localhost:8080/signup"
                               :contentType "application/json"
                               :data (-> user
                                         clj->js
                                         js/JSON.stringify)})))
       (p/then (fn [response]
                 (console/log "signed up")
-                response))))
+                (js->clj response :keywordize-keys true)))))
 
 (defn log-in [user]
   (console/log "logging in:" user)
@@ -86,3 +86,17 @@
       (p/then (fn [response]
                 (console/log "updated note")
                 response))))
+
+(defn redeem-signup [token]
+  (console/log "redeeming signup:" token)
+  (-> (p/promise
+        (.ajax js/$ (clj->js {:type "POST"
+                              :url "http://localhost:8080/redeem-signup"
+                              :contentType "application/json"
+                              :headers (authorization-header token)
+                              :data (-> {:token token}
+                                        clj->js
+                                        js/JSON.stringify)})))
+      (p/then (fn [response]
+                (console/log "redeemed signup")
+                (js->clj response :keywordize-keys true)))))

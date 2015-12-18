@@ -1,0 +1,7 @@
+@import '../variables';
+@import '../mixins/card';
+@import '../mixins/page';
+
+.RedeemSignupPage {
+  @include page;
+}

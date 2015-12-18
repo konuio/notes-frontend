@@ -1,0 +1,31 @@
+@import '../variables';
+@import '../mixins/body';
+@import '../mixins/card';
+@import '../mixins/page';
+
+.SignupPendingPage {
+  @include page;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &-card {
+    @include card;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
+
+  &-subtitle {
+    @include body;
+    margin-top: 10px;
+  }
+
+  &-title {
+    @include body;
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}

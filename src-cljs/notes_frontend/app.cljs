@@ -34,10 +34,19 @@
       (console/log "rendering:" data)
       (html [:div
              (case page
-               :login (html
-                        (om/build login/login-page (merge data state)))
-               :signup (html
-                         (om/build signup/signup-page (merge data state)))
-               :home (html
-                       (om/build home/home-page (merge data state)))
+               :login
+               (html
+                 (om/build login/login-page (merge data state)))
+               :signup
+               (html
+                 (om/build signup/signup-page (merge data state)))
+               :signup-pending
+               (html
+                 (om/build signup/signup-pending-page (merge data state)))
+               :redeem-signup
+               (html
+                 (om/build signup/redeem-signup-page (merge data state)))
+               :home
+               (html
+                 (om/build home/home-page (merge data state)))
                nil nil)]))))

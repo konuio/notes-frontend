@@ -31,32 +31,39 @@
                                  :loading false}}))
 
 (defn set-page! [data page]
-  (om/transact! data #(assoc % :page page)))
+  (om/transact! data #(merge % page)))
 
 (defn set-signup! [data signup]
   (om/transact! data #(assoc % :signup signup)))
 
 (defn sign-up! [data user]
-  (om/transact! data #(assoc-in % [:signup :loading] true))
+  (om/transact! data #(update % :signup (fn [signup] (merge signup {:loading true
+                                                                    :error nil}))))
   (-> (api/sign-up user)
-      (p/then (fn []
-                (om/transact! data #(-> %
-                                        (assoc :signup default-signup)
-                                        (assoc :login (assoc default-login :username (:username user)))))
-                (.setToken history/history (routes/login-path))))))
+      (p/then (fn [{:keys [error]}]
+                (if (and error (not= error "SUCCESS"))
+                  (om/transact! data #(update % :signup (fn [signup] (merge signup {:loading false
+                                                                                    :error error}))))
+                  (do (om/transact! data #(-> %
+                                              (assoc :signup default-signup)
+                                              (assoc :login (assoc default-login :username (:username user)))))
+                      (.setToken history/history (routes/signup-pending-path))))))))
 
 (defn set-login! [data login]
   (om/transact! data #(assoc % :login login)))
+
+(defn log-in-with-token! [data token]
+  (om/transact! data #(-> %
+                          (assoc :login default-login)
+                          (assoc :token token)))
+  (app-storage/set-token token)
+  (.setToken history/history (routes/home-path)))
 
 (defn log-in! [data user]
   (om/transact! data #(assoc-in % [:login :loading] true))
   (-> (api/log-in user)
       (p/then (fn [{:keys [token]}]
-                (om/transact! data #(-> %
-                                        (assoc :login default-login)
-                                        (assoc :token token)))
-                (app-storage/set-token token)
-                (.setToken history/history (routes/home-path))))))
+                (log-in-with-token! data token)))))
 
 (defn log-out! [data]
   ; TODO Actually send the logout request. Right now we just go to the login page.
@@ -132,12 +139,19 @@
 (defn hide-tooltip! [owner]
   (om/set-state! owner :tooltip nil))
 
+(defn redeem-signup! [data token]
+  (-> (api/redeem-signup token)
+      (p/branch (fn [{:keys [token]}]
+                  (log-in-with-token! data token))
+              (fn []
+                (.setToken history/history (routes/login-path))))))
+
 (defn post-message! [ch message]
   (put! ch message))
 
 (defn handle-message! [data owner {:keys [action] :as message}]
   (case action
-    :set-page (set-page! data (:page message))
+    :set-page (set-page! data message)
     :set-signup (set-signup! data (:signup message))
     :sign-up (sign-up! data (:user message))
     :set-login (set-login! data (:login message))
@@ -151,4 +165,5 @@
     :delete-note (delete-note! data (:id message))
     :create-note (create-note! data)
     :show-tooltip (show-tooltip! owner (:tooltip message))
-    :hide-tooltip (hide-tooltip! owner)))
+    :hide-tooltip (hide-tooltip! owner)
+    :redeem-signup (redeem-signup! data (:token message))))

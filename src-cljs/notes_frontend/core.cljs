@@ -1,4 +1,4 @@
-(ns ^:figwheel-always notes-frontend.core
+(ns notes-frontend.core
   (:require [devtools.core :as devtools]
             [notes-frontend.app :as app]
             [notes-frontend.app-state :as app-state]

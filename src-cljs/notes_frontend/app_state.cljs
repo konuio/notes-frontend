@@ -72,7 +72,8 @@
 (defn get-notes! [data owner token]
   (let [old-request (om/get-state owner [:requests :get-notes])
         token (or token (:token @data))
-        request (-> (api/get-notes token)
+        url (:konu-url @data)
+        request (-> (api/get-notes url token)
                     (p/then (fn [notes]
                               (om/transact! data (fn [data]
                                                    (-> data

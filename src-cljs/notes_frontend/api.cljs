@@ -32,10 +32,10 @@
                 (console/log "logged in")
                 (js->clj response :keywordize-keys true)))))
 
-(defn get-notes [token]
+(defn get-notes [url token]
   (console/log "getting notes")
   (-> (p/promise
-        (.ajax js/$ (clj->js {:url "http://localhost:8080/note"
+        (.ajax js/$ (clj->js {:url (goog.string.format "%s/note" url)
                               :headers (authorization-header token)})))
       .cancellable
       (p/then (fn [response]

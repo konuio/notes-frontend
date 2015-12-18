@@ -31,7 +31,16 @@
               [{:id "dev"
                 :source-paths ["src-cljs"]
                 :figwheel {}
-                :compiler {:main notes-frontend.core
+                :compiler {:main notes-frontend.dev
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/public/js/compiled/notes_frontend.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}
+
+               {:id "prod"
+                :source-paths ["src-cljs"]
+                :figwheel {}
+                :compiler {:main notes-frontend.prod
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/notes_frontend.js"
                            :output-dir "resources/public/js/compiled/out"

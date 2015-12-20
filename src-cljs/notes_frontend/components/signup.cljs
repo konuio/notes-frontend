@@ -5,6 +5,7 @@
             [notes-frontend.app-state :as app-state]
             [notes-frontend.components.buttons :refer [button]]
             [notes-frontend.history :as history]
+            [notes-frontend.components.page :as page]
             [notes-frontend.routes :as routes]
             [notes-frontend.validations :as validations]
             [promesa.core :as p]))
@@ -14,13 +15,14 @@
     (validations/valid-email? username)
     (validations/valid-passwords? password confirm)))
 
-(defn signup-page [{:keys [className ch signup]}]
+(defn signup-page [{:keys [className ch signup static-url]}]
   (let [{:keys [username password confirm error loading]} signup
         valid (valid? signup)
         submittable (and (not loading) valid)]
     (om/component
       (html [:div
-             {:className (js/classNames "SignupPage" className)}
+             {:className (js/classNames "SignupPage" className)
+              :style {:backgroundImage (page/page-background-image static-url)}}
              [:form.SignupPage-card
               {:on-submit (fn [e]
                             (.preventDefault e)
@@ -69,17 +71,18 @@
                                       (.preventDefault e)
                                       (.setToken history/history (routes/login-path)))})]]]))))
 
-(defn signup-pending-page [{:keys [className]}]
+(defn signup-pending-page [{:keys [className static-url]}]
   (om/component
     (html [:div
-           {:className (js/classNames "SignupPendingPage" className)}
+           {:className (js/classNames "SignupPendingPage" className)
+            :style {:backgroundImage (page/page-background-image static-url)}}
            [:div.SignupPendingPage-card
             [:div.SignupPendingPage-title
              "Thanks for signing up!"]
             [:div.SignupPendingPage-subtitle
              "Please check your email for a verification message."]]])))
 
-(defn redeem-signup-page [{:keys [ch className token]}]
+(defn redeem-signup-page [{:keys [ch className token static-url]}]
   (reify
     om/IWillMount
     (will-mount [_]
@@ -88,4 +91,5 @@
     om/IRender
     (render [_]
       (html [:div
-             {:className (js/classNames "RedeemSignupPage" className)}]))))
+             {:className (js/classNames "RedeemSignupPage" className)
+              :style {:backgroundImage (page/page-background-image static-url)}}]))))

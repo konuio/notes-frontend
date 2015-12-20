@@ -4,4 +4,5 @@
 
 (defonce setup-
   (swap! app-state/app-state (fn [state]
-                               (merge state {:konu-url "https://api.konu.io"}))))
+                               (merge state {:url "https://api.konu.io"
+                                             :static-url "https://s3-us-west-2.amazonaws.com/konu"}))))

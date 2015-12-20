@@ -4,6 +4,7 @@
             [shodan.console :as console]
             [notes-frontend.components.buttons :refer [button]]
             [notes-frontend.history :as history]
+            [notes-frontend.components.page :as page]
             [notes-frontend.routes :as routes]
             [notes-frontend.validations :as validations]
             [notes-frontend.app-state :as app-state]))
@@ -13,14 +14,15 @@
     (validations/valid-email? username)
     (validations/valid-password? password)))
 
-(defn login-page [{:keys [className ch login]}]
+(defn login-page [{:keys [className ch login static-url]}]
   (let [{:keys [username password loading]} login
         valid (valid? login)
         submittable (and (not loading) valid)
         focus (if (validations/valid-email? username) :password :username)]
     (om/component
       (html [:div
-             {:className (js/classNames "LoginPage" className)}
+             {:className (js/classNames "LoginPage" className)
+              :style {:backgroundImage (page/page-background-image static-url)}}
              [:form.LoginPage-card
               {:on-submit (fn [e]
                             (.preventDefault e)

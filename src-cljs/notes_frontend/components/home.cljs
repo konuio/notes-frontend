@@ -6,9 +6,11 @@
             [notes-frontend.components.buttons :refer [button]]
             [notes-frontend.components.tooltips :refer [tooltip]]
             [notes-frontend.history :as history]
+            [notes-frontend.components.page :as page]
             [notes-frontend.routes :as routes]
             [notes-frontend.utils :refer [truncate find-first]]
-            [notes-frontend.app-storage :as app-storage]))
+            [notes-frontend.app-storage :as app-storage]
+            [goog.string.format]))
 
 (defn error-message [{:keys [className title subtitle]}]
   (om/component
@@ -152,7 +154,7 @@
                    :title "No note selected"
                    :subtitle "Select a note on the left to get started."})])]))))
 
-(defn home-page [{:keys [className ch notes home tooltip] :as data}]
+(defn home-page [{:keys [className ch notes home tooltip static-url] :as data}]
   (let [{:keys [selected pending loading]} home]
     (reify
       om/IWillMount
@@ -165,7 +167,8 @@
       om/IRender
       (render [_]
         (html [:div
-               {:className (js/classNames "HomePage" className)}
+               {:className (js/classNames "HomePage" className)
+                :style {:backgroundImage (page/page-background-image static-url)}}
                [:div.HomePage-navbar
                 (om/build button
                           {:className "HomePage-button"

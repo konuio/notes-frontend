@@ -39,7 +39,7 @@
 (defn sign-up! [data user]
   (om/transact! data #(update % :signup (fn [signup] (merge signup {:loading true
                                                                     :error nil}))))
-  (-> (api/sign-up user)
+  (-> (api/sign-up (:url @data) user)
       (p/then (fn [{:keys [error]}]
                 (if (and error (not= error "SUCCESS"))
                   (om/transact! data #(update % :signup (fn [signup] (merge signup {:loading false
@@ -61,7 +61,7 @@
 
 (defn log-in! [data user]
   (om/transact! data #(assoc-in % [:login :loading] true))
-  (-> (api/log-in user)
+  (-> (api/log-in (:url @data) user)
       (p/then (fn [{:keys [token]}]
                 (log-in-with-token! data token)))))
 
@@ -72,7 +72,7 @@
 (defn get-notes! [data owner token]
   (let [old-request (om/get-state owner [:requests :get-notes])
         token (or token (:token @data))
-        url (:konu-url @data)
+        url (:url @data)
         request (-> (api/get-notes url token)
                     (p/then (fn [notes]
                               (om/transact! data (fn [data]
@@ -94,7 +94,7 @@
 (defn save-note! [data note]
   (let [{:keys [token]} @data]
     (om/transact! data #(assoc-in % [:home :loading] true))
-    (-> (api/update-note note token)
+    (-> (api/update-note (:url @data) note token)
         (p/then (fn []
                   (om/transact! data (fn [data]
                                        (let [note-index (find-index #(= (:id note) (:id %)) (:notes data))]
@@ -110,7 +110,7 @@
   (console/log "deleting with data:" data)
   (let [{:keys [token]} @data]
     (om/transact! data #(assoc-in % [:home :loading] true))
-    (-> (api/delete-note id token)
+    (-> (api/delete-note (:url @data) id token)
         (p/then (fn []
                   (om/transact! data (fn [data]
                                        (let [index (find-index #(= id (:id %)) (:notes data))]
@@ -124,7 +124,8 @@
 (defn create-note! [data]
   (let [{:keys [token]} @data]
     (om/transact! data #(assoc-in % [:home :loading] true))
-    (-> (api/create-note {:title ""
+    (-> (api/create-note (:url @data)
+                         {:title ""
                           :data ""}
                          token)
         (p/then (fn [note]
@@ -141,7 +142,7 @@
   (om/set-state! owner :tooltip nil))
 
 (defn redeem-signup! [data token]
-  (-> (api/redeem-signup token)
+  (-> (api/redeem-signup (:url @data) token)
       (p/branch (fn [{:keys [token]}]
                   (log-in-with-token! data token))
               (fn []

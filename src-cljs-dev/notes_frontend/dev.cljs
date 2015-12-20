@@ -5,4 +5,5 @@
 
 (defonce setup-
          (swap! app-state/app-state (fn [state]
-                                      (merge state {:konu-url "http://localhost:8080"}))))
+                                      (merge state {:url "http://localhost:8080"
+                                                    :static-url "http://localhost:8888"}))))

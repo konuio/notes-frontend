@@ -28,42 +28,24 @@
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
   :cljsbuild {:builds
-              [{:id "dev"
-                :source-paths ["src-cljs"]
-                :figwheel {}
-                :compiler {:main notes-frontend.dev
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/notes_frontend.js"
-                           :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
-
-               {:id "prod"
-                :source-paths ["src-cljs"]
-                :figwheel {}
-                :compiler {:main notes-frontend.prod
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/notes_frontend.js"
-                           :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
-
-               {:id "devcards"
-                :source-paths ["src-cljs"]
-                :figwheel {:devcards true}
-                :compiler {:main notes-frontend.cards.core
-                           :asset-path "js/compiled/devcards_out"
-                           :output-to "resources/public/js/compiled/notes_frontend_devcards.js"
-                           :output-dir "resources/public/js/compiled/devcards_out"
-                           :source-map-timestamp true}}
+              [{:id           "dev"
+                :source-paths ["src-cljs" "src-cljs-dev"]
+                :figwheel     {}
+                :compiler     {:main                 notes-frontend.dev
+                               :asset-path           "js/compiled/dev"
+                               :output-to            "resources/public/js/compiled/notes_frontend.dev.js"
+                               :output-dir           "resources/public/js/compiled/dev"
+                               :source-map-timestamp true}}
 
                ;; This next build is an compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
-               {:id "min"
-                :source-paths ["src-cljs"]
-                :compiler {:output-to "resources/public/js/compiled/notes_frontend.js"
-                           :main notes-frontend.core
-                           :optimizations :advanced
-                           :pretty-print false}}]}
+               {:id           "min"
+                :source-paths ["src-cljs" "src-cljs-prod"]
+                :compiler     {:main       notes-frontend.prod
+                               :output-to  "resources/public/js/compiled/notes_frontend.min.js"
+                               :output-dir "resources/public/js/compiled/min"
+                               :optimizations :whitespace}}]}
 
   :figwheel {:server-port 8888
              :css-dirs ["resources/public/css"]

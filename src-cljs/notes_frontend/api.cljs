@@ -6,11 +6,11 @@
 (defn authorization-header [token]
   {"Authorization" (goog.string.format "Token %s" token)})
 
-(defn sign-up [user]
+(defn sign-up [url user]
   (console/log "signing up:" user)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "POST"
-                              :url "http://localhost:8080/signup"
+                              :url (goog.string.format "%s/signup" url)
                               :contentType "application/json"
                               :data (-> user
                                         clj->js
@@ -19,11 +19,11 @@
                 (console/log "signed up")
                 (js->clj response :keywordize-keys true)))))
 
-(defn log-in [user]
+(defn log-in [url user]
   (console/log "logging in:" user)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "POST"
-                              :url "http://localhost:8080/login"
+                              :url (goog.string.format "%s/login" url)
                               :contentType "application/json"
                               :data (-> user
                                         clj->js
@@ -45,11 +45,11 @@
                   (console/log "got notes:" notes)
                   notes)))))
 
-(defn create-note [note token]
+(defn create-note [url note token]
   (console/log "creating note:" note)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "POST"
-                              :url "http://localhost:8080/note"
+                              :url (goog.string.format "%s/note" url)
                               :contentType "application/json"
                               :headers (authorization-header token)
                               :data (-> note
@@ -62,21 +62,21 @@
                   (console/log "created note:" note)
                   note)))))
 
-(defn delete-note [id token]
+(defn delete-note [url id token]
   (console/log "deleting note:" id)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "DELETE"
-                              :url (goog.string.format "http://localhost:8080/note/%s" id)
+                              :url (goog.string.format "%s/note/%s" url id)
                               :headers (authorization-header token)})))
       (p/then (fn [response]
                 (console/log "deleted note")
                 response))))
 
-(defn update-note [note token]
+(defn update-note [url note token]
   (console/log "updating note:" note)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "PUT"
-                              :url (goog.string.format "http://localhost:8080/note/%s" (:id note))
+                              :url (goog.string.format "%s/note/%s" url (:id note))
                               :contentType "application/json"
                               :headers (authorization-header token)
                               :data (-> note
@@ -87,11 +87,11 @@
                 (console/log "updated note")
                 response))))
 
-(defn redeem-signup [token]
+(defn redeem-signup [url token]
   (console/log "redeeming signup:" token)
   (-> (p/promise
         (.ajax js/$ (clj->js {:type "POST"
-                              :url "http://localhost:8080/redeem-signup"
+                              :url (goog.string.format "%s/redeem-signup" url)
                               :contentType "application/json"
                               :headers (authorization-header token)
                               :data (-> {:token token}
